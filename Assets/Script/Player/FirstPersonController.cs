@@ -65,6 +65,9 @@ public class FirstPersonController : MonoBehaviour
         inputActions.Player.Crouch.performed += OnCrouch;
         inputActions.Player.Sprint.performed += OnSprintStarted;
         inputActions.Player.Sprint.canceled += OnSprintCanceled;
+
+        ConversationController.OnConversationStart += () => SwitchActionMap(inputActions.UI, inputActions.Player);
+        ConversationController.OnConversationEnd += () => SwitchActionMap(inputActions.Player, inputActions.UI);
     }
 
     private void OnEnable()
@@ -224,5 +227,11 @@ public class FirstPersonController : MonoBehaviour
         }
 
         lastPositionX = transform.position.x;
+    }
+
+    private void SwitchActionMap(InputActionMap mapToEnable, InputActionMap mapToDisable)
+    {
+        mapToDisable.Disable();
+        mapToEnable.Enable();
     }
 }

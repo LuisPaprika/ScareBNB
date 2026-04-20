@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class IntroductionText : MonoBehaviour
 {
@@ -53,7 +52,6 @@ public class IntroductionText : MonoBehaviour
     
     private void ShowText()
     {
-        textUI.text = introductionLines[currentLineIndex];
         StartCoroutine(TypeText());
     }
 
@@ -71,6 +69,7 @@ public class IntroductionText : MonoBehaviour
 
     private IEnumerator TypeText()
     {
+        textUI.text = introductionLines[currentLineIndex];
         textUI.maxVisibleCharacters = 0;
         foreach (char letter in introductionLines[currentLineIndex])
         {

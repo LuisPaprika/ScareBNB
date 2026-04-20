@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BottomText : MonoBehaviour
 {
-    public static BottomText Instance { get; private set; }
+    [field: SerializeField] public static BottomText Instance { get; private set; }
     [SerializeField] private TMPro.TextMeshProUGUI textMesh;
     [SerializeField] private Animator animator;
 
