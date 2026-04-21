@@ -203,21 +203,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void AccumulateDistance()
     {
-
-        if (!controller.isGrounded || moveInput.magnitude < 0.1f)
-        {
-            accumulatedDistance = 0f;
-            return;
-        }
-
         float distanceThisFrame = Mathf.Abs(transform.position.x - lastPositionX);
-
-        if (distanceThisFrame < 0.01f)
-        {
-            accumulatedDistance = 0f;
-            return;
-        }
-
+        
         accumulatedDistance += distanceThisFrame;
 
         if (accumulatedDistance >= stepDistance)
