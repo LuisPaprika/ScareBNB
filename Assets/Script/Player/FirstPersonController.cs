@@ -34,7 +34,7 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 velocity;
     private Vector2 moveInput;
     private float accumulatedDistance;
-    private float lastPositionX;
+    private Vector3 lastPosition;
     private float cameraPitch;
     private bool isSprinting;
     private bool isCrouched;
@@ -195,7 +195,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void AccumulateDistance()
     {
-        float distanceThisFrame = Mathf.Abs(transform.position.x - lastPositionX);
+        float distanceThisFrame = Vector3.Distance(transform.position, lastPosition);
         
         accumulatedDistance += distanceThisFrame;
 
@@ -205,7 +205,7 @@ public class FirstPersonController : MonoBehaviour
             accumulatedDistance = 0f;
         }
 
-        lastPositionX = transform.position.x;
+        lastPosition = transform.position;
     }
 
     private void SwitchActionMap(InputActionMap mapToEnable, InputActionMap mapToDisable)
