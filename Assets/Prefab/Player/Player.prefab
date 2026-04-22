@@ -277,7 +277,7 @@ MonoBehaviour:
   jumpHeight: 1.5
   gravity: -24
   crouchHeight: 1.5
-  crouchSpeed: 2.5
+  crouchSpeed: 1
   lookSensitivity: 0.1
   maxLookAngle: 90
   lockCursor: 1

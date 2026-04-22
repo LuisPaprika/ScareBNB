@@ -156,12 +156,6 @@ public class FirstPersonController : MonoBehaviour
     {
         isCrouched = !isCrouched;
         controller.height = isCrouched ? crouchHeight : standingHeight;
-        controller.center = new Vector3(standingCenter.x, controller.height / 2f, standingCenter.z);
-
-        if (cameraTransform != null)
-        {
-            cameraTransform.localPosition = new Vector3(0f, controller.height / 2f, 0f);
-        }
     }
 
     private void OnSprintStarted(InputAction.CallbackContext context)
