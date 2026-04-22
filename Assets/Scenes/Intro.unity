@@ -630,8 +630,7 @@ MonoBehaviour:
   - "Luckily, fortune was on my side\u2014I found a place close to my workplace,
     and it was very cheap as well."
   textUI: {fileID: 2056757793}
-  typingSpeed: 0.05
-  blackFadeScript: {fileID: 0}
+  typingSpeed: 0.025
 --- !u!1 &2128042420
 GameObject:
   m_ObjectHideFlags: 0

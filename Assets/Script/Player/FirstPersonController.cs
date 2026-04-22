@@ -39,7 +39,6 @@ public class FirstPersonController : MonoBehaviour
     private bool isSprinting;
     private bool isCrouched;
     private float standingHeight;
-    private Vector3 standingCenter;
     [field: SerializeField] public static FirstPersonController Instance {get; private set;}
 
     private void Awake()
@@ -53,7 +52,6 @@ public class FirstPersonController : MonoBehaviour
 
         controller = GetComponent<CharacterController>();
         standingHeight = controller.height;
-        standingCenter = controller.center;
 
         if (cameraTransform == null)
         {

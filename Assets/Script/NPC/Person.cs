@@ -1,10 +1,9 @@
-using UnityEditor.Search;
 using UnityEngine;
 
-public class Person : MonoBehaviour, IInteractable
+public class Person : InteractBaseClass
 {
     [SerializeField] private string[] conversationLines;
-    public void Interact()
+    public override void Interact()
     {
         ConversationController.Instance.StartConversation(conversationLines);
     }
