@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 5332457722101528238}
   - component: {fileID: 1024983621591109208}
   - component: {fileID: 1609895616396552426}
-  - component: {fileID: 5905225470773865967}
   - component: {fileID: 7284062611534026026}
   - component: {fileID: 1122627211592393800}
   - component: {fileID: 8969436456081711661}
@@ -235,29 +234,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5905225470773865967
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6713813228744837155}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &7284062611534026026
 CharacterController:
   m_ObjectHideFlags: 0
@@ -276,10 +252,10 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 3
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.6
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -296,8 +272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cameraTransform: {fileID: 9078389667108049950}
-  walkSpeed: 5
-  sprintSpeed: 8
+  walkSpeed: 2.5
+  sprintSpeed: 4
   jumpHeight: 1.5
   gravity: -24
   crouchHeight: 1
@@ -305,7 +281,7 @@ MonoBehaviour:
   lookSensitivity: 0.1
   maxLookAngle: 90
   lockCursor: 1
-  bobbingSpeed: 14
+  bobbingSpeed: 5
   bobbingAmount: 0.05
   bobbingSpeedMultiplier: 2
   footstepSounds:

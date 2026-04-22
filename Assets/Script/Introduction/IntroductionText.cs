@@ -35,7 +35,7 @@ public class IntroductionText : MonoBehaviour
                 }
                 else
                 {
-                    SceneLoader.Instance.SetNextScene("SampleScene");
+                    SceneLoader.Instance.SetNextScene("Apartment");
                     BlackFade.Instance.FadeOut();
                 }
             }
