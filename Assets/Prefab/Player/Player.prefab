@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cameraTransform: {fileID: 9078389667108049950}
-  interactRange: 3
+  interactRange: 4.5
 --- !u!114 &2776633768576140571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUpSystem
   pickUpPoint: {fileID: 548198388664887154}
+  cameraTransform: {fileID: 9078389667108049950}
 --- !u!1 &7589849474552083346
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +343,7 @@ Transform:
   m_GameObject: {fileID: 7589849474552083346}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.276, y: -0.377, z: 0.318}
+  m_LocalPosition: {x: 0.276, y: -0.532, z: 0.318}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -358,19 +359,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1335525873004240870, guid: 3cbcda7c616b28f4f9af829f0308c3fb, type: 3}
       propertyPath: m_fontSize
-      value: 52.95
+      value: 28.8
       objectReference: {fileID: 0}
     - target: {fileID: 1335525873004240870, guid: 3cbcda7c616b28f4f9af829f0308c3fb, type: 3}
       propertyPath: m_fontSizeBase
-      value: 52.95
+      value: 28.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012723632882077707, guid: 3cbcda7c616b28f4f9af829f0308c3fb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1549.758
       objectReference: {fileID: 0}
     - target: {fileID: 2012723632882077707, guid: 3cbcda7c616b28f4f9af829f0308c3fb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 2012723632882077707, guid: 3cbcda7c616b28f4f9af829f0308c3fb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 52
+      value: 179
       objectReference: {fileID: 0}
     - target: {fileID: 2671500093028817740, guid: 3cbcda7c616b28f4f9af829f0308c3fb, type: 3}
       propertyPath: m_Name

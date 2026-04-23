@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,6 +28,12 @@ public class PickUpSystem : MonoBehaviour
 
     private void DropItem()
     {
+        if (InteractSystem.Instance.LookForInteractable() && HasItem())
+        {
+            BottomText.Instance.ShowText("I need to drop what I'm holding first.");
+            return;
+         }
+
         if(pickUpPoint.childCount > 0)
         {
             Transform item = pickUpPoint.GetChild(0);
@@ -47,4 +54,9 @@ public class PickUpSystem : MonoBehaviour
         itemTransform.localPosition = Vector3.zero;
         itemTransform.localRotation = Quaternion.identity;
     } 
+
+    public bool HasItem()
+    {
+        return pickUpPoint.childCount > 0;
+    }
 }
