@@ -153,10 +153,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnCrouch(InputAction.CallbackContext context)
     {
-        allowAccumulateDistance = false;
         isCrouched = !isCrouched;
         controller.height = isCrouched ? crouchHeight : standingHeight;
-        allowAccumulateDistance = true;
     }
 
     private void OnSprintStarted(InputAction.CallbackContext context)
@@ -198,13 +196,15 @@ public class FirstPersonController : MonoBehaviour
 
     private void AccumulateDistance()
     {
-        if(!allowAccumulateDistance)
+        if(!allowAccumulateDistance || !controller.isGrounded || moveInput.magnitude < 0.1f)
         {
             return;
         }
 
-        float distanceThisFrame = Vector3.Distance(transform.position, lastPosition);
-        
+        Vector3 currentHorizontalPosition = new Vector3(transform.position.x, 0f, transform.position.z);
+        Vector3 lastHorizontalPosition = new Vector3(lastPosition.x, 0f, lastPosition.z);
+        float distanceThisFrame = Vector3.Distance(currentHorizontalPosition, lastHorizontalPosition);
+
         accumulatedDistance += distanceThisFrame;
 
         if (accumulatedDistance >= stepDistance)
