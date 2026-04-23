@@ -32,7 +32,7 @@ public class PickUpSystem : MonoBehaviour
         {
             BottomText.Instance.ShowText("I need to drop what I'm holding first.");
             return;
-         }
+        }
 
         if(pickUpPoint.childCount > 0)
         {

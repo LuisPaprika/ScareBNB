@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
+    [SerializeField] private string dialogueText;
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            BottomText.Instance.ShowText("The owner says the key is in the mailbox next to the stairs.");
+            BottomText.Instance.ShowText(dialogueText);
             Destroy(gameObject);
         }
     }

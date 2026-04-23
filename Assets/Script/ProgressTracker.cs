@@ -3,6 +3,7 @@ using UnityEngine;
 public class ProgressTracker : MonoBehaviour
 {
     [field: SerializeField] public static ProgressTracker Instance {get; private set;}
+    private bool hasKey = false;
 
     void Awake()
     {
@@ -13,4 +14,15 @@ public class ProgressTracker : MonoBehaviour
         }
         Instance = this;
     }
+
+    public void ObtainKey()
+    {
+        hasKey = true;
+    }
+
+    public bool HasKey()
+    {
+        return hasKey;
+    }
+
 }

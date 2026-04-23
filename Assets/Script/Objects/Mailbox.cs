@@ -1,14 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class InteractDialogue : InteractBaseClass
+public class Mailbox : InteractBaseClass
 {
     [SerializeField] private string dialogueText;
     public override void Interact()
     {
         BottomText.Instance.ShowText(dialogueText);
-        if (!reInteactable)
-        {
-            this.enabled = false;
-        }
+        ProgressTracker.Instance.ObtainKey();
     }
 }
