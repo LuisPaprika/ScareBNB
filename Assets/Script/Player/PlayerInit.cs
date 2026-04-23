@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class PlayerInit : MonoBehaviour
 {
     [field: SerializeField] public static PlayerInit Instance { get; private set; }
     private Dictionary<string, (Vector3, Quaternion)> spawnPoints = new Dictionary<string, (Vector3, Quaternion)>();
-    private string currentSceneName;
+    private UnityAction<Scene, LoadSceneMode> onSceneLoadedHandler;
+    [field: SerializeField] public GameObject heldItem {get; private set; }
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -16,15 +18,38 @@ public class PlayerInit : MonoBehaviour
         }
         Instance = this;
 
-        SceneManager.sceneLoaded += (scene, mode) => OnSceneLoaded();
-
         OnSceneLoaded();
+    }
+
+    void Start()
+    {
+        onSceneLoadedHandler = (scene, mode) => OnSceneLoaded();
+        SceneManager.sceneLoaded += onSceneLoadedHandler;
+        BlackFade.OnFadeOutStart += GetHoldingItem;
     }
 
     private void OnSceneLoaded()
     {
-        currentSceneName = SceneManager.GetActiveScene().name;
-        SetPlayerPositionForScene(currentSceneName);
+        SetPlayerPositionForScene(SceneManager.GetActiveScene().name);
+        HoldItemOnSceneLoad();
+    }
+
+    private void HoldItemOnSceneLoad()
+    {
+        if (heldItem != null)
+        {
+            PickUpSystem.Instance.PickUpItem(heldItem);
+        }
+    }
+
+    private void GetHoldingItem()
+    {
+        if (PickUpSystem.Instance.HasItem())
+        {
+            heldItem = PickUpSystem.Instance.GetHeldItem();
+            heldItem.transform.SetParent(null);
+            DontDestroyOnLoad(heldItem);
+        }
     }
 
     public void SetSpawnPointKey(string sceneName, Vector3 spawnPoint, Quaternion rotation)
@@ -58,6 +83,12 @@ public class PlayerInit : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= onSceneLoadedHandler;
+        BlackFade.OnFadeOutStart -= GetHoldingItem;
     }
 
 }

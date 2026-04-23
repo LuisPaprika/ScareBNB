@@ -1,4 +1,3 @@
-using UnityEngine;
 
 public class InsideDoor203 : InteractBaseClass
 {

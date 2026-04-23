@@ -10,7 +10,7 @@ public class PickUpSystem : MonoBehaviour
 
     void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
             return;
@@ -20,7 +20,7 @@ public class PickUpSystem : MonoBehaviour
 
     void Update()
     {
-        if(FirstPersonController.inputActions.Player.Attack.WasPressedThisFrame())
+        if (FirstPersonController.inputActions.Player.Attack.WasPressedThisFrame())
         {
             DropItem();
         }
@@ -33,7 +33,7 @@ public class PickUpSystem : MonoBehaviour
             return;
         }
 
-        if(pickUpPoint.childCount > 0)
+        if (pickUpPoint.childCount > 0)
         {
             Transform item = pickUpPoint.GetChild(0);
             item.SetParent(null);
@@ -45,14 +45,24 @@ public class PickUpSystem : MonoBehaviour
 
     public void PickUpItem(GameObject item)
     {
-        GameObject itemCopy = Instantiate(item);
-        Transform itemTransform = itemCopy.transform;
-        Rigidbody itemRb = itemCopy.GetComponent<Rigidbody>();
+        if (pickUpPoint.childCount > 0)
+        {
+            BottomText.Instance.ShowText("My hand is full");
+            return;
+        }
+        
+        Rigidbody itemRb = item.GetComponent<Rigidbody>();
         itemRb.isKinematic = true;
-        itemTransform.SetParent(pickUpPoint);
-        itemTransform.localPosition = Vector3.zero;
-        itemTransform.localRotation = Quaternion.identity;
-    } 
+        item.transform.SetParent(pickUpPoint);
+        item.transform.localPosition = Vector3.zero;
+        item.transform.localRotation = Quaternion.identity;
+    }
+
+    public GameObject GetHeldItem()
+    {
+        Transform item = pickUpPoint.GetChild(0);
+        return item.gameObject;
+    }
 
     public bool HasItem()
     {

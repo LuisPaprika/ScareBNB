@@ -11,7 +11,7 @@ public class TutorialCanvas : MonoBehaviour
         };
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         BlackFade.OnFadeInComplete -= () =>
         {
