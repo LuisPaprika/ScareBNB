@@ -8,6 +8,7 @@ public class IntroductionText : MonoBehaviour
     [SerializeField] private float typingSpeed = 0.05f;
     private InputSystem_Actions inputActions;
     private int currentLineIndex = 0;
+    private bool isTyping = false;
 
     void Awake()
     {
@@ -25,7 +26,7 @@ public class IntroductionText : MonoBehaviour
 
     void Update()
     {
-        if(inputActions.UI.Click.WasPressedThisFrame())
+        if(inputActions.UI.Click.WasPressedThisFrame() && isTyping)
         {
             if(currentLineIndex >= introductionLines.Length)
                 {
@@ -60,6 +61,7 @@ public class IntroductionText : MonoBehaviour
     
     private void ShowText()
     {
+        isTyping = true;
         StartCoroutine(TypeText());
     }
 
