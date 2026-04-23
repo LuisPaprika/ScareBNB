@@ -1,9 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickUpSystem : MonoBehaviour
 {
     [field: SerializeField] public static PickUpSystem Instance { get; set; }
     [SerializeField] private Transform pickUpPoint;
+    [SerializeField] private Transform cameraTransform;
 
     void Awake()
     {
@@ -31,7 +33,7 @@ public class PickUpSystem : MonoBehaviour
             item.SetParent(null);
             Rigidbody itemRb = item.GetComponent<Rigidbody>();
             itemRb.isKinematic = false;
-            itemRb.AddForce(transform.forward * 5f, ForceMode.Impulse);
+            itemRb.AddForce(cameraTransform.forward * 8f, ForceMode.Impulse);
         }
     }
 

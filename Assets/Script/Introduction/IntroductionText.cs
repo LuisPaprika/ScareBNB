@@ -13,7 +13,14 @@ public class IntroductionText : MonoBehaviour
     {
         inputActions = new InputSystem_Actions();
         inputActions.UI.Enable();
-        ShowText();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void Start()
+    {
+        BlackFade.OnFadeInComplete += ShowText;
     }
 
     void Update()
@@ -35,6 +42,7 @@ public class IntroductionText : MonoBehaviour
                 }
                 else
                 {
+                    StopAllCoroutines();
                     SceneLoader.Instance.SetNextScene("Apartment");
                     BlackFade.Instance.FadeOut();
                 }
@@ -63,6 +71,7 @@ public class IntroductionText : MonoBehaviour
 
     void OnDisable()
     {
+        BlackFade.OnFadeInComplete -= ShowText;
         inputActions.UI.Disable();
         inputActions.Dispose();
     }

@@ -34,24 +34,27 @@ public class PlayerInit : MonoBehaviour
 
     private void SetPlayerPositionForScene(string sceneName)
     {
+        Transform playerTransform = FirstPersonController.Instance != null ? FirstPersonController.Instance.transform : null;
         if (spawnPoints.ContainsKey(sceneName))
         {
             var spawnData = spawnPoints[sceneName];
             if (FirstPersonController.Instance != null)
             {
+                FirstPersonController.Instance.SetAllowAccumulateDistance(false);
                 var controller = FirstPersonController.Instance.GetComponent<CharacterController>();
                 if (controller != null)
                 {
                     controller.enabled = false;
-                    FirstPersonController.Instance.transform.position = spawnData.Item1;
-                    FirstPersonController.Instance.transform.rotation = spawnData.Item2;
+                    playerTransform.position = spawnData.Item1;
+                    playerTransform.rotation = spawnData.Item2;
                     controller.enabled = true;
                 }
                 else
                 {
-                    FirstPersonController.Instance.transform.position = spawnData.Item1;
-                    FirstPersonController.Instance.transform.rotation = spawnData.Item2;
+                    playerTransform.position = spawnData.Item1;
+                    playerTransform.rotation = spawnData.Item2;
                 }
+                FirstPersonController.Instance.SetAllowAccumulateDistance(true);
             }
         }
 

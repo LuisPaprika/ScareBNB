@@ -38,6 +38,7 @@ public class FirstPersonController : MonoBehaviour
     private float cameraPitch;
     private bool isSprinting;
     private bool isCrouched;
+    private bool allowAccumulateDistance = true;
     private float standingHeight;
     [field: SerializeField] public static FirstPersonController Instance {get; private set;}
 
@@ -152,8 +153,10 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnCrouch(InputAction.CallbackContext context)
     {
+        allowAccumulateDistance = false;
         isCrouched = !isCrouched;
         controller.height = isCrouched ? crouchHeight : standingHeight;
+        allowAccumulateDistance = true;
     }
 
     private void OnSprintStarted(InputAction.CallbackContext context)
@@ -195,6 +198,11 @@ public class FirstPersonController : MonoBehaviour
 
     private void AccumulateDistance()
     {
+        if(!allowAccumulateDistance)
+        {
+            return;
+        }
+
         float distanceThisFrame = Vector3.Distance(transform.position, lastPosition);
         
         accumulatedDistance += distanceThisFrame;
@@ -212,5 +220,10 @@ public class FirstPersonController : MonoBehaviour
     {
         mapToDisable.Disable();
         mapToEnable.Enable();
+    }
+
+    public void SetAllowAccumulateDistance(bool allow)
+    {
+        allowAccumulateDistance = allow;
     }
 }
