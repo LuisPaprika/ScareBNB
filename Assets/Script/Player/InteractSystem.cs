@@ -21,7 +21,7 @@ public class InteractSystem : MonoBehaviour
 
     void Update()
     {
-        if(FirstPersonController.inputActions.Player.Attack.WasPressedThisFrame())
+        if(FirstPersonController.inputActions.Player.Attack.WasPressedThisFrame() && FirstPersonController.Instance.allowControls)
         {
             Interact();
         }

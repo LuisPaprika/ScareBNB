@@ -31,6 +31,7 @@ public class FirstPersonController : MonoBehaviour
 
     private CharacterController controller;
     [field: SerializeField] public static InputSystem_Actions inputActions {get; private set;}
+    [field: SerializeField] public bool allowControls {get; private set;} = true;
     private Vector3 velocity;
     private Vector2 moveInput;
     private float accumulatedDistance;
@@ -38,7 +39,6 @@ public class FirstPersonController : MonoBehaviour
     private float cameraPitch;
     private bool isSprinting;
     private bool isCrouched;
-    private bool allowControls = false;
     private bool allowAccumulateDistance = true;
     private float standingHeight;
     [field: SerializeField] public static FirstPersonController Instance {get; private set;}
@@ -70,7 +70,7 @@ public class FirstPersonController : MonoBehaviour
     void Start()
     {
         BlackFade.OnFadeOutStart += () => allowControls = false;
-        BlackFade.OnFadeInComplete += () => allowControls = true;
+        BlackFade.OnFadeInStart += () => allowControls = true;
 
         ConversationController.OnConversationStart += () => SwitchActionMap(inputActions.UI, inputActions.Player);
         ConversationController.OnConversationEnd += () => SwitchActionMap(inputActions.Player, inputActions.UI);

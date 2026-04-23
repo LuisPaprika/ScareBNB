@@ -10,4 +10,12 @@ public class TutorialCanvas : MonoBehaviour
             animator.SetTrigger("Start");
         };
     }
+
+    void OnDestroy()
+    {
+        BlackFade.OnFadeInComplete -= () =>
+        {
+            animator.SetTrigger("Start");
+        };
+    }
 }
