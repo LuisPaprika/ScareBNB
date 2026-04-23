@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 8123532760304881887}
   - component: {fileID: 1059149017888236323}
   - component: {fileID: 1978804618747962760}
+  - component: {fileID: 2344038321700966791}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -282,3 +283,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   baseCrosshair: {fileID: 5747559308927483810}
   interactCrosshair: {fileID: 8611484129974232649}
+--- !u!114 &2344038321700966791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3357449966179272478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f116c5041f8e0f41be09b138fdcbb5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DontDestroyOnLoad

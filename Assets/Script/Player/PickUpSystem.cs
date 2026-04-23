@@ -28,9 +28,8 @@ public class PickUpSystem : MonoBehaviour
 
     private void DropItem()
     {
-        if (InteractSystem.Instance.LookForInteractable() && HasItem())
+        if (InteractSystem.Instance.LookForInteractable())
         {
-            BottomText.Instance.ShowText("I need to drop what I'm holding first.");
             return;
         }
 

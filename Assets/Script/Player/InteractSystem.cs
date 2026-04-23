@@ -49,11 +49,6 @@ public class InteractSystem : MonoBehaviour
 
     private void Interact()
     {
-        if(PickUpSystem.Instance.HasItem())
-        {
-            return;
-        }
-
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red, 1f);
         if(Physics.Raycast(ray, out RaycastHit hit, interactRange, notPlayerLayer))

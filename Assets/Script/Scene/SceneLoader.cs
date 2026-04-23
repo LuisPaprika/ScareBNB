@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [field: SerializeField] public static SceneLoader Instance { get; private set; }
-    private Dictionary<string, Transform> spawnPoints = new Dictionary<string, Transform>();
     private string nextSceneName;
     void Awake()
     {

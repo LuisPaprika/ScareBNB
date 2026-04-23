@@ -7,7 +7,6 @@ public class TutorialCanvas : MonoBehaviour
     {
         BlackFade.OnFadeInComplete += () =>
         {
-            Debug.Log("Fade In Complete");
             animator.SetTrigger("Start");
         };
     }

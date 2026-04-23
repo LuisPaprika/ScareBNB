@@ -38,6 +38,7 @@ public class FirstPersonController : MonoBehaviour
     private float cameraPitch;
     private bool isSprinting;
     private bool isCrouched;
+    private bool allowControls = false;
     private bool allowAccumulateDistance = true;
     private float standingHeight;
     [field: SerializeField] public static FirstPersonController Instance {get; private set;}
@@ -64,6 +65,12 @@ public class FirstPersonController : MonoBehaviour
         inputActions.Player.Crouch.performed += OnCrouch;
         inputActions.Player.Sprint.performed += OnSprintStarted;
         inputActions.Player.Sprint.canceled += OnSprintCanceled;
+    }
+
+    void Start()
+    {
+        BlackFade.OnFadeOutStart += () => allowControls = false;
+        BlackFade.OnFadeInComplete += () => allowControls = true;
 
         ConversationController.OnConversationStart += () => SwitchActionMap(inputActions.UI, inputActions.Player);
         ConversationController.OnConversationEnd += () => SwitchActionMap(inputActions.Player, inputActions.UI);
@@ -95,11 +102,17 @@ public class FirstPersonController : MonoBehaviour
         inputActions.Player.Crouch.performed -= OnCrouch;
         inputActions.Player.Sprint.performed -= OnSprintStarted;
         inputActions.Player.Sprint.canceled -= OnSprintCanceled;
+        BlackFade.OnFadeInStart -= () => allowControls = false;
+        BlackFade.OnFadeOutComplete -= () => allowControls = true;
         inputActions.Dispose();
     }
 
     private void Update()
     {
+        if(!allowControls)
+        {
+            return;
+        }
         HandleLook();
         HandleMovement();
         AccumulateDistance();

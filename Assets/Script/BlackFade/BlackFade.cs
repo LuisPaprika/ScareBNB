@@ -8,6 +8,8 @@ public class BlackFade : MonoBehaviour
     public static BlackFade Instance { get; private set; }
     public static event Action OnFadeOutComplete;
     public static event Action OnFadeInComplete;
+    public static event Action OnFadeInStart;
+    public static event Action OnFadeOutStart;
     [SerializeField] private Animator animator;
     void Awake()
     {
@@ -30,6 +32,16 @@ public class BlackFade : MonoBehaviour
     public void FadeOut()
     {
         animator.SetTrigger("FadeOut");
+    }
+
+    public void OnFadeInStartAnimation()
+    {
+        OnFadeInStart?.Invoke();
+    }
+
+    public void OnFadeOutStartAnimation()
+    {
+        OnFadeOutStart?.Invoke();
     }
 
     public void OnFadeOutAnimationComplete()
