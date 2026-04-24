@@ -290,6 +290,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 942f062d5220816499b575b36d4f6795, type: 3}
   - {fileID: 8300000, guid: 2f3c49533c16b514180fd08818f83fa2, type: 3}
   stepDistance: 2
+  <allowControls>k__BackingField: 1
 --- !u!114 &8969436456081711661
 MonoBehaviour:
   m_ObjectHideFlags: 0
