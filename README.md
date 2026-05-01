@@ -32,9 +32,15 @@ or
 
 ---
 
-## 📸 Screenshots
-<img width="1543" height="861" alt="image" src="https://github.com/user-attachments/assets/7ef256fb-2694-46fc-a249-c71801510c34" />
-<img width="1542" height="853" alt="image" src="https://github.com/user-attachments/assets/bd35c1dd-0eba-4b4b-9f9b-c92a8a688bab" />
-<img width="1551" height="856" alt="image" src="https://github.com/user-attachments/assets/dfbd33f7-8a36-4e15-a27b-619d69997245" />
+## 📸 Gameplay
+
+<img width="800" height="450" alt="IceShaving" src="https://github.com/user-attachments/assets/631e14da-10c9-4356-b0f8-5c47478627c1" />
+<img width="800" height="450" alt="IceCream" src="https://github.com/user-attachments/assets/cecbfbd1-ba07-4af8-b636-2d358f4ea175" />
+<img width="800" height="450" alt="Waffle" src="https://github.com/user-attachments/assets/074c7f9d-e9eb-4cd4-8323-dc3dba73cd50" />
+<img width="800" height="450" alt="Customer" src="https://github.com/user-attachments/assets/664248df-a7c3-4ad4-85de-ae657a77c7e0" />
+
+
+
+
 
 
