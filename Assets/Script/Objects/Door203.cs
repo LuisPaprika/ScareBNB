@@ -7,7 +7,7 @@ public class Door203 : InteractBaseClass
     [SerializeField] private Transform spawnPoint;
     public override void Interact()
     {
-        if (ProgressTracker.Instance.HasKey())
+        if (ProgressTracker.Instance.hasKey)
         {
             PlayerInit.Instance.SetSpawnPointKey(SceneManager.GetActiveScene().name, spawnPoint.position, spawnPoint.rotation);
             SceneLoader.Instance.SetNextScene("Room");

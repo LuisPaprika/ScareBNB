@@ -5,7 +5,7 @@ public class TutorialCanvas : MonoBehaviour
     [SerializeField] private Animator animator;
     void Start()
     {
-        if(ProgressTracker.Instance.HasSeenTutorial())
+        if(ProgressTracker.Instance.sawTutorial)
         {
             Destroy(gameObject);
             return;

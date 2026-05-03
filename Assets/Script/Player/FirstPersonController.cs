@@ -239,4 +239,9 @@ public class FirstPersonController : MonoBehaviour
     {
         allowAccumulateDistance = allow;
     }
+
+    public void AllowingControl(bool value)
+    {
+        allowControls = value;
+    }
 }
