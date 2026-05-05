@@ -9,6 +9,10 @@ public class ProgressTracker : MonoBehaviour
     [field:SerializeField] public bool doneCleaning {get; private set;} = false;
     private int currentCleanedSpot = 0;
 
+    [field: SerializeField] public bool hasSeenRoomIntro {get; private set;} = false;
+    [field: SerializeField] public bool hasPlaceSuitcase {get; private set;} = false;
+    
+
     void Awake()
     {
         if(Instance != null && Instance != this)
@@ -42,6 +46,12 @@ public class ProgressTracker : MonoBehaviour
     public bool DoneCleaning()
     {
         return currentCleanedSpot >= 5;
+    }
+
+
+    public void PlaceSuitcase()
+    {
+        hasPlaceSuitcase = true;
     }
 
 }
