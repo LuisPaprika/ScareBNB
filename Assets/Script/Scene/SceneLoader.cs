@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +13,6 @@ public class SceneLoader : MonoBehaviour
             return;
         }
         Instance = this;
-        BlackFade.OnFadeOutComplete += LoadScene;
     }
 
     public void SetNextScene(string sceneName)
@@ -22,13 +20,21 @@ public class SceneLoader : MonoBehaviour
         nextSceneName = sceneName;
     }
 
+    public void LoadSceneWithFade(string sceneName)
+    {
+        SetNextScene(sceneName);
+        BlackFade.OnFadeOutComplete += LoadSceneOnce;
+        BlackFade.Instance.FadeOut();
+    }
+
+    private void LoadSceneOnce()
+    {
+        BlackFade.OnFadeOutComplete -= LoadSceneOnce;
+        LoadScene();
+    }
+
     public void LoadScene()
     {
         SceneManager.LoadScene(nextSceneName);
-    }
-
-    private void OnDestroy()
-    {
-        BlackFade.OnFadeOutComplete -= LoadScene;
     }
 }

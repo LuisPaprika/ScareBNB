@@ -21,7 +21,7 @@ public class InteractSystem : MonoBehaviour
 
     void Update()
     {
-        if(FirstPersonController.inputActions.Player.Attack.WasPressedThisFrame() && FirstPersonController.Instance.allowControls)
+        if(FirstPersonController.inputActions.Player.Attack.WasPressedThisFrame() && FirstPersonController.Instance.allowControls && !FirstPersonController.Instance.isSitting)
         {
             Interact();
         }
@@ -29,6 +29,12 @@ public class InteractSystem : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (FirstPersonController.Instance != null && FirstPersonController.Instance.isSitting)
+        {
+            PlayerUI.Instance.ShowInteractCrosshair(false);
+            return;
+        }
+
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         if(Physics.Raycast(ray, out RaycastHit hit, interactRange, notPlayerLayer))
         {

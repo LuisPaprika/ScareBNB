@@ -32,6 +32,8 @@ public class FirstPersonController : MonoBehaviour
     private CharacterController controller;
     [field: SerializeField] public static InputSystem_Actions inputActions {get; private set;}
     [field: SerializeField] public bool allowControls {get; private set;} = true;
+    [field: SerializeField] public bool allowMovement {get; private set;} = true;
+    public bool isSitting { get; private set; }
     private Vector3 velocity;
     private Vector2 moveInput;
     private float accumulatedDistance;
@@ -113,8 +115,14 @@ public class FirstPersonController : MonoBehaviour
         {
             return;
         }
+
         HandleLook();
-        HandleMovement();
+
+        if (allowMovement)
+        {
+            HandleMovement();
+        }
+
         AccumulateDistance();
         HandleHeadBobbing();
     }
@@ -158,7 +166,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (!controller.isGrounded)
+        if (!allowMovement || !controller.isGrounded)
             return;
 
         velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -166,17 +174,26 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnCrouch(InputAction.CallbackContext context)
     {
+        if (!allowMovement)
+            return;
+
         isCrouched = !isCrouched;
         controller.height = isCrouched ? crouchHeight : standingHeight;
     }
 
     private void OnSprintStarted(InputAction.CallbackContext context)
     {
+        if (!allowMovement)
+            return;
+
         isSprinting = true;
     }
 
     private void OnSprintCanceled(InputAction.CallbackContext context)
     {
+        if (!allowMovement)
+            return;
+
         isSprinting = false;
     }
 
@@ -243,5 +260,15 @@ public class FirstPersonController : MonoBehaviour
     public void AllowingControl(bool value)
     {
         allowControls = value;
+    }
+
+    public void AllowMovement(bool value)
+    {
+        allowMovement = value;
+    }
+
+    public void SetSitting(bool value)
+    {
+        isSitting = value;
     }
 }

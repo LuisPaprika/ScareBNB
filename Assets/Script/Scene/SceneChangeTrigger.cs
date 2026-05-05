@@ -11,8 +11,7 @@ public class SceneChangeTrigger : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             PlayerInit.Instance.SetSpawnPointKey(SceneManager.GetActiveScene().name, spawnPoint.position, spawnPoint.rotation);
-            SceneLoader.Instance.SetNextScene(nextSceneName);
-            BlackFade.Instance.FadeOut();
+            SceneLoader.Instance.LoadSceneWithFade(nextSceneName);
         }
     }
 }

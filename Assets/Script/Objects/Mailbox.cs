@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Mailbox : InteractBaseClass
@@ -8,5 +7,10 @@ public class Mailbox : InteractBaseClass
     {
         BottomText.Instance.ShowText(dialogueText);
         ProgressTracker.Instance.ObtainKey();
+
+        if (!reInteactable)
+        {
+            enabled = false;
+        }
     }
 }

@@ -34,6 +34,11 @@ public class BlackFade : MonoBehaviour
         animator.SetTrigger("FadeOut");
     }
 
+    public void FadeIn()
+    {
+        animator.SetTrigger("FadeIn");
+    }
+
     public void OnFadeInStartAnimation()
     {
         OnFadeInStart?.Invoke();

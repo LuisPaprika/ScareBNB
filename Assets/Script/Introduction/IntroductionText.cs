@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VectorGraphics;
 using UnityEngine;
 
 public class IntroductionText : MonoBehaviour
@@ -44,8 +45,7 @@ public class IntroductionText : MonoBehaviour
                 else
                 {
                     StopAllCoroutines();
-                    SceneLoader.Instance.SetNextScene("Apartment");
-                    BlackFade.Instance.FadeOut();
+                    SceneLoader.Instance.LoadSceneWithFade("Apartment");
                 }
             }
             else
@@ -61,6 +61,7 @@ public class IntroductionText : MonoBehaviour
     
     private void ShowText()
     {
+        Debug.Log("ShowText called");
         isTyping = true;
         StartCoroutine(TypeText());
     }

@@ -24,5 +24,7 @@ public class SuitcaseSpot : InteractBaseClass
         spotVisual.SetActive(true);
 
         enabled = false;
+
+        BottomText.Instance.ShowText("I really need to go to toilet");
     }
 }
