@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,15 +7,23 @@ public class DirtySpot : InteractBaseClass
 {
     [SerializeField] private Canvas progressCanvas;
     [SerializeField] private Slider cleaningProgressBar;
+    [SerializeField] private TMPro.TextMeshProUGUI dirtySpotCounterText;
     [SerializeField] private float cleaningTime;
     private bool checkedPersistence = false;
     private float cleaningProgress = 0f;
 
     void Update()
     {
+        if(PlayerPrefs.GetInt("PlacementSpot_suitcase_spot_Placed", 0) == 0)
+        {
+            progressCanvas.gameObject.SetActive(false);
+            return;
+        }
+
         Ray ray = new Ray(InteractSystem.Instance.CameraTransform.position, InteractSystem.Instance.CameraTransform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, InteractSystem.Instance.InteractRange, InteractSystem.Instance.NotPlayerLayer) && hit.collider.gameObject == gameObject)
         {
+            dirtySpotCounterText.text = ProgressTracker.Instance.currentCleanedSpot + " / 6";
             progressCanvas.gameObject.SetActive(true);
         }
         else
@@ -35,6 +44,10 @@ public class DirtySpot : InteractBaseClass
 
     public override void Interact()
     {
+        if(PlayerPrefs.GetInt("PlacementSpot_suitcase_spot_Placed", 0) == 0)
+        {
+            return;
+        }
         StartCoroutine(Cleaning());
     }
 

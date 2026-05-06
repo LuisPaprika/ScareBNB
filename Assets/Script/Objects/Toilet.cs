@@ -17,19 +17,14 @@ public class Toilet : InteractBaseClass
 
     public override void Interact()
     {
-        if (PlayerPrefs.GetInt("PlacementSpot_suitcase_spot_Placed", 0) == 0)
+        if (PlayerPrefs.GetInt("AllSpotsCleaned", 0) == 0)
         {
-            BottomText.Instance.ShowText("I should look around the room first");
+            BottomText.Instance.ShowText("I didn't want to use this yet...");
             return;
         }
 
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;
         BlackFade.Instance.FadeOut();
-
-        if (!reInteactable)
-        {
-            enabled = false;
-        }
     }
 
     private void Update()
@@ -94,7 +89,6 @@ public class Toilet : InteractBaseClass
 
         toiletCanvas.gameObject.SetActive(true);
         toiletSlider.value = 0f;
-        prompt.text = "Hold Space";
         canStand = false;
         holdTime = 0f;
     }
@@ -116,5 +110,10 @@ public class Toilet : InteractBaseClass
 
         toiletCanvas.gameObject.SetActive(false);
         canStand = false;
+
+        if(!reInteactable)
+        {
+            enabled = false;
+        }
     }
 }

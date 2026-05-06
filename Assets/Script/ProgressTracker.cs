@@ -1,21 +1,20 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 public class ProgressTracker : MonoBehaviour
 {
-    [field: SerializeField] public static ProgressTracker Instance {get; private set;}
-    [field:SerializeField] public bool sawTutorial {get; private set;} = false;
-    [field:SerializeField] public bool hasKey {get; private set;} = false;
-    [field:SerializeField] public bool doneCleaning {get; private set;} = false;
-    private int currentCleanedSpot = 0;
+    [field: SerializeField] public static ProgressTracker Instance { get; private set; }
+    [field: SerializeField] public bool sawTutorial { get; private set; } = false;
+    [field: SerializeField] public bool hasKey { get; private set; } = false;
+    public int currentCleanedSpot { get; private set; } = 0;
 
-    [field: SerializeField] public bool hasSeenRoomIntro {get; private set;} = false;
-    [field: SerializeField] public bool hasPlaceSuitcase {get; private set;} = false;
-    
+    [field: SerializeField] public bool hasSeenRoomIntro { get; private set; } = false;
+    [field: SerializeField] public bool hasPlaceSuitcase { get; private set; } = false;
+
 
     void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -36,14 +35,20 @@ public class ProgressTracker : MonoBehaviour
     public void AddCleanedSpot()
     {
         currentCleanedSpot++;
-        if(currentCleanedSpot >= 5)
+        if (currentCleanedSpot >= 6)
         {
-            doneCleaning = true;
-            PlayerPrefs.SetInt("AllSpotsCleaned", 1);
-            PlayerPrefs.Save();
-            BottomText.Instance.ShowText("I am done with cleaning");
+            StartCoroutine(WaitAndShowText());
         }
     }
+
+    private IEnumerator WaitAndShowText()
+    {
+        yield return new WaitForSeconds(2f);
+        PlayerPrefs.SetInt("AllSpotsCleaned", 1);
+        PlayerPrefs.Save();
+        BottomText.Instance.ShowText("I need to go to the toilet");
+    }
+
 
     public bool DoneCleaning()
     {
