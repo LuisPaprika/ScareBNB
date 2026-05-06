@@ -7,6 +7,10 @@ public class InteractSystem : MonoBehaviour
     [SerializeField] private float interactRange = 3f;
     private int notPlayerLayer;
 
+    public Transform CameraTransform => cameraTransform;
+    public float InteractRange => interactRange;
+    public int NotPlayerLayer => notPlayerLayer;
+
     void Awake()
     {
         if(Instance != null && Instance != this)

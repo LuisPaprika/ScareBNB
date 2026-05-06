@@ -87,8 +87,7 @@ public class Toilet : InteractBaseClass
 
         FirstPersonController.inputActions.Player.Jump.performed += OnStandUpRequested;
 
-        CharacterController controller = FirstPersonController.Instance.GetComponent<CharacterController>();
-        controller.enabled = false;
+        FirstPersonController.Instance.GetComponent<CharacterController>().enabled = false;
 
         FirstPersonController.Instance.transform.position = playerTargetPosition.position;
         FirstPersonController.Instance.transform.rotation = playerTargetPosition.rotation;
@@ -111,9 +110,8 @@ public class Toilet : InteractBaseClass
 
         FirstPersonController.Instance.transform.position = standPosition;
         FirstPersonController.Instance.transform.rotation = standRotation;
-
-        CharacterController controller = FirstPersonController.Instance.GetComponent<CharacterController>();
-        controller.enabled = true;
+        
+        FirstPersonController.Instance.GetComponent<CharacterController>().enabled = true;
         FirstPersonController.Instance.AllowMovement(true);
 
         toiletCanvas.gameObject.SetActive(false);

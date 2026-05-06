@@ -39,6 +39,8 @@ public class ProgressTracker : MonoBehaviour
         if(currentCleanedSpot >= 5)
         {
             doneCleaning = true;
+            PlayerPrefs.SetInt("AllSpotsCleaned", 1);
+            PlayerPrefs.Save();
             BottomText.Instance.ShowText("I am done with cleaning");
         }
     }

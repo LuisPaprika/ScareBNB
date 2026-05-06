@@ -14,6 +14,8 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float gravity = -24f;
     [SerializeField] private float crouchHeight = 1f;
     [SerializeField] private float crouchSpeed = 2.5f;
+    [SerializeField] private float crawlHeight = 0.5f;
+    [SerializeField] private float crawlSpeed = 1f;
 
     [Header("Look")]
     [SerializeField] private float lookSensitivity = 0.1f;
@@ -33,7 +35,9 @@ public class FirstPersonController : MonoBehaviour
     [field: SerializeField] public static InputSystem_Actions inputActions {get; private set;}
     [field: SerializeField] public bool allowControls {get; private set;} = true;
     [field: SerializeField] public bool allowMovement {get; private set;} = true;
+    public bool allowJumping { get; private set; } = false;
     public bool isSitting { get; private set; }
+    public bool isCrawling { get; private set; }
     private Vector3 velocity;
     private Vector2 moveInput;
     private float accumulatedDistance;
@@ -143,7 +147,15 @@ public class FirstPersonController : MonoBehaviour
     private void HandleMovement()
     {
         moveInput = inputActions.Player.Move.ReadValue<Vector2>();
-        float targetSpeed = isCrouched ? crouchSpeed : (isSprinting ? sprintSpeed : walkSpeed);
+        float targetSpeed;
+        if (isCrawling)
+        {
+            targetSpeed = crawlSpeed;
+        }
+        else
+        {
+            targetSpeed = isCrouched ? crouchSpeed : (isSprinting ? sprintSpeed : walkSpeed);
+        }
 
         Vector3 moveDir = transform.forward * moveInput.y + transform.right * moveInput.x;
         float dot = Vector3.Dot(cameraTransform.forward, moveDir);
@@ -166,7 +178,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (!allowMovement || !controller.isGrounded)
+        if (!allowMovement || !allowJumping || !controller.isGrounded)
             return;
 
         velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -174,7 +186,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnCrouch(InputAction.CallbackContext context)
     {
-        if (!allowMovement)
+        if (!allowMovement || isCrawling)
             return;
 
         isCrouched = !isCrouched;
@@ -226,7 +238,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void AccumulateDistance()
     {
-        if(!allowAccumulateDistance || !controller.isGrounded || moveInput.magnitude < 0.1f)
+        if(!allowAccumulateDistance || !controller.isGrounded || isCrawling || moveInput.magnitude < 0.1f)
         {
             return;
         }
@@ -270,5 +282,30 @@ public class FirstPersonController : MonoBehaviour
     public void SetSitting(bool value)
     {
         isSitting = value;
+    }
+
+    public void SetCrawling(bool value)
+    {
+        isCrawling = value;
+        if (isCrawling)
+        {
+            controller.height = crawlHeight;
+            isCrouched = false;
+        }
+        else
+        {
+            controller.height = standingHeight;
+        }
+    }
+    public void SetLookDirection(float yaw, float pitch)
+    {
+        transform.eulerAngles = new Vector3(0, yaw, 0);
+        cameraPitch = pitch;
+        cameraTransform.localEulerAngles = Vector3.right * cameraPitch;
+    }
+
+    public void AllowJumping(bool value)
+    {
+        allowJumping = value;
     }
 }
