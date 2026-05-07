@@ -21,7 +21,7 @@ public class Bed : InteractBaseClass
     }
     public override void Interact()
     {
-        if(PlayerPrefs.GetInt("DrankBeer", 0) == 0)
+        if(PlayerPrefs.GetInt("DrankBeers", 0) == 0)
         {
             BottomText.Instance.ShowText("I don't need to sleep yet...");
             return;

@@ -45,6 +45,7 @@ public class FirstPersonController : MonoBehaviour
     private float cameraPitch;
     private bool isSprinting;
     private bool isCrouched;
+    private bool isDrinking;
     private bool allowAccumulateDistance = true;
     private float standingHeight;
     [field: SerializeField] public static FirstPersonController Instance {get; private set;}
@@ -282,6 +283,11 @@ public class FirstPersonController : MonoBehaviour
     public void SetSitting(bool value)
     {
         isSitting = value;
+    }
+
+    public void SetDrinking(bool value)
+    {
+        isDrinking = value;
     }
 
     public void SetCrawling(bool value)
