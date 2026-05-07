@@ -14,6 +14,14 @@ public class Shower : InteractBaseClass
     private bool isShowering = false;
     private bool canStand = false;
 
+    void Start()
+    {
+        if(PlayerPrefs.GetInt("UsedShower", 0) == 1)
+        {
+            enabled = false;
+        }
+    }
+
     private void Update()
     {
         if (isShowering)
@@ -31,11 +39,11 @@ public class Shower : InteractBaseClass
         }
     }
 
-
     public override void Interact()
     {
         if (PlayerPrefs.GetInt("PlacementSpot_shopping_bag_Placed") == 0)
         {
+            BottomText.Instance.ShowText("I didn't want to use this yet...");
             return;
         }
 
@@ -92,6 +100,9 @@ public class Shower : InteractBaseClass
         FirstPersonController.Instance.SetSitting(false);
         showerCanvas.gameObject.SetActive(false);
         BlackFade.Instance.FadeIn();
+
+        PlayerPrefs.SetInt("UsedShower", 1);
+        PlayerPrefs.Save();
 
         if (!reInteactable)
         {

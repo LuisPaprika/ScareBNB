@@ -16,6 +16,14 @@ public class Toilet : InteractBaseClass
     private float holdTime = 0f;
     [SerializeField] float maxHoldTime = 10f;
 
+    void Start()
+    {
+        if(PlayerPrefs.GetInt("UsedToilet", 0) == 1)
+        {
+            enabled = false;
+        }
+    }
+
     public override void Interact()
     {
         if (PlayerPrefs.GetInt("AllSpotsCleaned", 0) == 0)
