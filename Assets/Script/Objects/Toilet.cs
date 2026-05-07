@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class Toilet : InteractBaseClass
 {
@@ -13,7 +14,7 @@ public class Toilet : InteractBaseClass
     private bool isSitting;
     private bool canStand = false;
     private float holdTime = 0f;
-    private const float maxHoldTime = 10f;
+    [SerializeField] float maxHoldTime = 10f;
 
     public override void Interact()
     {
@@ -115,5 +116,15 @@ public class Toilet : InteractBaseClass
         {
             enabled = false;
         }
+
+        StartCoroutine(WaitAndShowText());
+    }
+
+    private IEnumerator WaitAndShowText()
+    {
+        yield return new WaitForSeconds(2f);
+        PlayerPrefs.SetInt("UsedToilet", 1);
+        PlayerPrefs.Save();
+        BottomText.Instance.ShowText("I should go buy some shampoo and soap...");
     }
 }

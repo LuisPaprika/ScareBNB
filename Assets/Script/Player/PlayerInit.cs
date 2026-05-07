@@ -36,6 +36,7 @@ public class PlayerInit : MonoBehaviour
 
     private void HoldItemOnSceneLoad()
     {
+        return; //Holding items on scene load is currently disabled since the only item the player can hold is the shopping bag, which is given to the player, not picked up
         if (heldItem != null)
         {
             PickUpSystem.Instance.PickUpItem(heldItem);
@@ -44,9 +45,12 @@ public class PlayerInit : MonoBehaviour
 
     private void GetHoldingItem()
     {
+        return;
         if (PickUpSystem.Instance.HasItem())
         {
             heldItem = PickUpSystem.Instance.GetHeldItem();
+            if (heldItem == null)
+                return;
             heldItem.transform.SetParent(null);
             DontDestroyOnLoad(heldItem);
         }

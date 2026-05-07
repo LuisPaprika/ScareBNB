@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickUpSystem : MonoBehaviour
@@ -16,6 +14,16 @@ public class PickUpSystem : MonoBehaviour
             return;
         }
         Instance = this;
+
+        if(PlayerPrefs.GetInt("UsedStore", 0) == 1)
+        {
+            EnablingItem(0);
+        }
+
+        if(PlayerPrefs.GetInt("Slept", 0) == 1)
+        {
+            EnablingItem(-1);
+        }
     }
 
     void Update()
@@ -28,6 +36,7 @@ public class PickUpSystem : MonoBehaviour
 
     private void DropItem()
     {
+        return; //Dropping items is currently disabled since the only item the player can hold is the shopping bag, which is given to the player, not picked up
         if (InteractSystem.Instance.LookForInteractable())
         {
             return;
@@ -45,6 +54,8 @@ public class PickUpSystem : MonoBehaviour
 
     public void PickUpItem(GameObject item)
     {
+        return; //This is currently only used for the suitcase, which is given to the player, not picked up
+
         if (pickUpPoint.childCount > 0)
         {
             BottomText.Instance.ShowText("My hand is full");
@@ -60,6 +71,8 @@ public class PickUpSystem : MonoBehaviour
 
     public GameObject GetHeldItem()
     {
+        if (pickUpPoint.childCount == 0)
+            return null;
         Transform item = pickUpPoint.GetChild(0);
         return item.gameObject;
     }
@@ -67,5 +80,26 @@ public class PickUpSystem : MonoBehaviour
     public bool HasItem()
     {
         return pickUpPoint.childCount > 0;
+    }
+
+
+    //This is simpler system, works for this project
+    public void EnablingItem(int index)
+    {
+        if(index == 0) //shopping bag
+        {
+            pickUpPoint.GetChild(0).gameObject.SetActive(true);
+            pickUpPoint.GetChild(1).gameObject.SetActive(false);
+        }
+        else if(index == 1) //beer
+        {
+            pickUpPoint.GetChild(0).gameObject.SetActive(false);
+            pickUpPoint.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            pickUpPoint.GetChild(0).gameObject.SetActive(false);
+            pickUpPoint.GetChild(1).gameObject.SetActive(false);
+        }
     }
 }

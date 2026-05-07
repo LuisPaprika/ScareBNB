@@ -374,7 +374,7 @@ MonoBehaviour:
   progressCanvas: {fileID: 6813873765272092109}
   cleaningProgressBar: {fileID: 3748891625501321055}
   dirtySpotCounterText: {fileID: 1509773374389863690}
-  cleaningTime: 5
+  cleaningTime: 0.1
 --- !u!1 &2719619139880849623
 GameObject:
   m_ObjectHideFlags: 0

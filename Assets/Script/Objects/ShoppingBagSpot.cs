@@ -1,12 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class SuitcaseSpot : InteractBaseClass
+public class ShoppingBagSpot : InteractBaseClass
 {
-    [SerializeField] private string spotID = "suitcase_spot";
     [SerializeField] private GameObject spotVisual;
-
-    private string SaveKey => $"PlacementSpot_{spotID}_Placed";
+    private string SaveKey => "PlacementSpot_shopping_bag_Placed";
     private bool hasHinted = false;
 
     private void Awake()
@@ -20,6 +18,11 @@ public class SuitcaseSpot : InteractBaseClass
 
     private void Update()
     {
+        if(PlayerPrefs.GetInt("UsedStore") == 0)
+        {
+            return;
+        }
+
         if (!enabled)
             return;
 
@@ -34,7 +37,7 @@ public class SuitcaseSpot : InteractBaseClass
             {
                 if (!hasHinted)
                 {
-                    BottomText.Instance.ShowText("I should put my suitcase down somewhere");
+                    BottomText.Instance.ShowText("I should put my bag down somewhere");
                     hasHinted = true;
                 }
             }
@@ -47,9 +50,16 @@ public class SuitcaseSpot : InteractBaseClass
 
     public override void Interact()
     {
+        if(PlayerPrefs.GetInt("UsedStore") == 0)
+        {
+            return;
+        }
+
         spotVisual.SetActive(true);
 
         enabled = false;
+
+        PickUpSystem.Instance.EnablingItem(-1);
 
         StartCoroutine(WaitAndShowText());
     }
@@ -59,6 +69,6 @@ public class SuitcaseSpot : InteractBaseClass
         yield return new WaitForSeconds(2f);
         PlayerPrefs.SetInt(SaveKey, 1);
         PlayerPrefs.Save();
-        BottomText.Instance.ShowText("This room needs to be cleaned");
+        BottomText.Instance.ShowText("I should take a shower");
     }
 }

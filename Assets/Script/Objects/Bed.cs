@@ -21,6 +21,11 @@ public class Bed : InteractBaseClass
     }
     public override void Interact()
     {
+        if(PlayerPrefs.GetInt("UsedStore") == 0)
+        {
+            return;
+        }
+
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;
         BlackFade.Instance.FadeOut();
         
