@@ -63,5 +63,8 @@ public class Bed : InteractBaseClass
         controller.enabled = true;
         yield return new WaitForSeconds(5f);
         BlackFade.Instance.FadeIn();
+
+        PlayerPrefs.SetInt("SleptInBed", 1);
+        PlayerPrefs.Save();
     }
 }
