@@ -9,6 +9,13 @@ public class ShoppingBagSpot : InteractBaseClass
 
     private void Awake()
     {
+        if(PlayerPrefs.GetInt("UsedStore") == 0)
+        {
+            enabled = false;
+            Destroy(gameObject);
+            return;
+        }
+
         bool isPlaced = PlayerPrefs.GetInt(SaveKey, 0) == 1;
         spotVisual.SetActive(isPlaced);
 

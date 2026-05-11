@@ -11,6 +11,13 @@ public class NetCafeTrigger : MonoBehaviour
         if (PlayerPrefs.GetInt("SeeMailFlap", 0) == 0)
         {
             Destroy(gameObject);
+            return;
+        }
+
+        if(PlayerPrefs.GetInt("UsedNetCafe", 0) == 1)
+        {
+            Destroy(gameObject);
+            return;
         }
     }
 
