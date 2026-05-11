@@ -47,11 +47,11 @@ public class ShoppingBag : InteractBaseClass
     }
     public override void Interact()
     {
-        // if (PlayerPrefs.GetInt("UsedShower", 0) == 0)
-        // {
-        //     BottomText.Instance.ShowText("I don't need to use this yet...");
-        //     return;
-        // }
+        if (PlayerPrefs.GetInt("UsedShower", 0) == 0)
+        {
+            BottomText.Instance.ShowText("I don't need to use this yet...");
+            return;
+        }
 
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;
         BlackFade.Instance.FadeOut();

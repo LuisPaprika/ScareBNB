@@ -20,7 +20,7 @@ public class PickUpSystem : MonoBehaviour
             EnablingItem(0);
         }
 
-        if(PlayerPrefs.GetInt("Slept", 0) == 1)
+        if(PlayerPrefs.GetInt("SleptInBed", 0) == 1)
         {
             EnablingItem(-1);
         }
