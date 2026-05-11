@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -89,7 +90,6 @@ public class Shower : InteractBaseClass
 
     private void StandUp()
     {
-        FirstPersonController.inputActions.Player.Jump.performed -= OnStandUpRequested;
         CharacterController controller = FirstPersonController.Instance.GetComponent<CharacterController>();
         controller.enabled = false;
         FirstPersonController.Instance.transform.position = standPosition.position;
@@ -104,6 +104,8 @@ public class Shower : InteractBaseClass
         PlayerPrefs.SetInt("UsedShower", 1);
         PlayerPrefs.Save();
 
+        StartCoroutine(BottomText.Instance.WaitAndShowText(2f, "I should drink some beers"));
+
         if (!reInteactable)
         {
             enabled = false;
@@ -115,7 +117,9 @@ public class Shower : InteractBaseClass
         if (!canStand)
             return;
 
+        FirstPersonController.inputActions.Player.Jump.performed -= OnStandUpRequested;
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;
         BlackFade.Instance.FadeOut();
     }
+
 }

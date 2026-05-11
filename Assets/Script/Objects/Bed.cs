@@ -1,19 +1,18 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bed : InteractBaseClass
 {
     [SerializeField] private Transform sleepPosition;
     [SerializeField] private Transform standPosition;
+    private bool hasStandUp = false;
 
     void Update()
     {
-        if(FirstPersonController.Instance.isCrawling)
+        if (PlayerPrefs.GetInt("SeeMailFlap", 0) == 1)
         {
-            Debug.Log("Checking for jump input to stand up from bed.");
-            if(FirstPersonController.inputActions.Player.Jump.WasPressedThisFrame())
+            if (FirstPersonController.inputActions.Player.Jump.WasPressedThisFrame() && !hasStandUp)
             {
+                hasStandUp = true;
                 BlackFade.OnFadeOutComplete += OnFadeOutComplete;
                 BlackFade.Instance.FadeOut();
             }
@@ -21,36 +20,35 @@ public class Bed : InteractBaseClass
     }
     public override void Interact()
     {
-        if(PlayerPrefs.GetInt("DrankBeers", 0) == 0)
+        if (PlayerPrefs.GetInt("DrankBeers", 0) == 0)
         {
             BottomText.Instance.ShowText("I don't need to sleep yet...");
             return;
         }
+        SetInteractable(false);
 
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;
         BlackFade.Instance.FadeOut();
-        
-        if (!reInteactable)
-        {
-            enabled = false;
-        }
     }
 
     private void OnFadeOutComplete()
     {
         BlackFade.OnFadeOutComplete -= OnFadeOutComplete;
-        if(!FirstPersonController.Instance.isCrawling)
+        if (!FirstPersonController.Instance.isCrawling)
         {
             FirstPersonController.Instance.SetCrawling(true);
             StartCoroutine(WaitAndFadeIn());
         }
-        else{
+        else if (FirstPersonController.Instance.isCrawling)
+        {
+            StandPromptCanvas.Instance.EnablePrompt(false);
             FirstPersonController.Instance.SetCrawling(false);
             FirstPersonController.Instance.transform.position = standPosition.position;
             FirstPersonController.Instance.SetLookDirection(standPosition.eulerAngles.y, standPosition.eulerAngles.x);
             BlackFade.Instance.FadeIn();
+            enabled = false;
         }
-        
+
     }
 
     private System.Collections.IEnumerator WaitAndFadeIn()
@@ -59,7 +57,7 @@ public class Bed : InteractBaseClass
         controller.enabled = false;
         FirstPersonController.Instance.transform.position = sleepPosition.position;
         FirstPersonController.Instance.SetLookDirection(sleepPosition.eulerAngles.y, sleepPosition.eulerAngles.x);
-        
+
         controller.enabled = true;
         yield return new WaitForSeconds(5f);
         BlackFade.Instance.FadeIn();

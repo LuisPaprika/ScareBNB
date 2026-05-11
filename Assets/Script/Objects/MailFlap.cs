@@ -39,7 +39,6 @@ public class MailFlap : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, InteractSystem.Instance.NotPlayerLayer)
             && hit.collider.gameObject == gameObject)
         {
-            Debug.Log("Zooming in on mail flap...");
             hasZoomed = true;
             StartCoroutine(ZoomSequence());
         }
@@ -49,21 +48,18 @@ public class MailFlap : MonoBehaviour
     {
         isZooming = true;
 
-        // Disable input FIRST, then snapshot state so nothing drifts
         FirstPersonController.Instance.AllowMovement(false);
         FirstPersonController.inputActions.Player.Look.Disable();
 
-        yield return null; // let the FPC fully stop before snapshotting
+        yield return null;
 
         originalCameraRotation = playerCamera.transform.rotation;
         float startFOV = playerCamera.fieldOfView;
 
-        // Build target rotation: camera looks directly at the look point if set
         Vector3 focusPosition = lookPoint != null ? lookPoint.position : transform.position;
         Vector3 directionToObject = (focusPosition - playerCamera.transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(directionToObject);
 
-        // --- Zoom in ---
         float time = 0f;
         while (time < zoomDuration)
         {
@@ -74,14 +70,11 @@ public class MailFlap : MonoBehaviour
             yield return null;
         }
 
-        // Snap to exact target
-        playerCamera.transform.rotation = targetRotation;
         playerCamera.fieldOfView = zoomFOV;
 
         BottomText.Instance.ShowText("I need to stay still...");
         yield return new WaitForSeconds(5f);
 
-        // --- Zoom out ---
         time = 0f;
         while (time < zoomDuration)
         {
@@ -92,13 +85,16 @@ public class MailFlap : MonoBehaviour
             yield return null;
         }
 
-        // Snap back to exact original
         playerCamera.fieldOfView = originalFOV;
 
         FirstPersonController.Instance.AllowMovement(true);
         FirstPersonController.inputActions.Player.Look.Enable();
 
+        PlayerPrefs.SetInt("SeeMailFlap", 1);
+        PlayerPrefs.Save();
+
         BottomText.Instance.ShowText("It should be safe to move now.");
+        StandPromptCanvas.Instance.EnablePrompt(true);
         isZooming = false;
     }
 }

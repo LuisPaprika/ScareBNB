@@ -42,7 +42,7 @@ public class InteractSystem : MonoBehaviour
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         if(Physics.Raycast(ray, out RaycastHit hit, interactRange, notPlayerLayer))
         {
-            if(hit.collider.TryGetComponent(out InteractBaseClass interactable) && interactable.enabled)
+            if(hit.collider.TryGetComponent(out InteractBaseClass interactable) && interactable.enabled && interactable.interactable)
             {
                 PlayerUI.Instance.ShowInteractCrosshair(true);
             }
@@ -63,7 +63,7 @@ public class InteractSystem : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red, 1f);
         if(Physics.Raycast(ray, out RaycastHit hit, interactRange, notPlayerLayer))
         {
-            if(hit.collider.TryGetComponent(out InteractBaseClass interactable) && interactable.enabled)
+            if(hit.collider.TryGetComponent(out InteractBaseClass interactable) && interactable.enabled && interactable.interactable)
             {
                 interactable.Interact();
             }

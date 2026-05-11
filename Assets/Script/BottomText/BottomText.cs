@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BottomText : MonoBehaviour
@@ -20,5 +21,11 @@ public class BottomText : MonoBehaviour
     {
         textMesh.text = text;
         animator.SetTrigger("Show");
+    }
+
+    public IEnumerator WaitAndShowText(float delay, string text)
+    {
+        yield return new WaitForSeconds(delay);
+        ShowText(text);
     }
 }

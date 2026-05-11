@@ -51,14 +51,8 @@ public class SuitcaseSpot : InteractBaseClass
 
         enabled = false;
 
-        StartCoroutine(WaitAndShowText());
-    }
-
-    private IEnumerator WaitAndShowText()
-    {
-        yield return new WaitForSeconds(2f);
         PlayerPrefs.SetInt(SaveKey, 1);
         PlayerPrefs.Save();
-        BottomText.Instance.ShowText("This room needs to be cleaned");
+        StartCoroutine(BottomText.Instance.WaitAndShowText(2f, "This room needs to be cleaned"));
     }
 }

@@ -1,12 +1,14 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class InteractBaseClass : MonoBehaviour
 {
     [SerializeField] private protected bool reInteactable;
+    public bool interactable { get; private set; } = true;
     public abstract void Interact();
-    public virtual void ChangeCursor(bool show)
+    public void SetInteractable(bool value)
     {
-        PlayerUI.Instance.ShowInteractCrosshair(show);
+        interactable = value;
     }
 }

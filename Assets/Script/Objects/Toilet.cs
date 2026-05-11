@@ -18,7 +18,7 @@ public class Toilet : InteractBaseClass
 
     void Start()
     {
-        if(PlayerPrefs.GetInt("UsedToilet", 0) == 1)
+        if (PlayerPrefs.GetInt("UsedToilet", 0) == 1)
         {
             enabled = false;
         }
@@ -74,6 +74,7 @@ public class Toilet : InteractBaseClass
         if (!isSitting || !canStand)
             return;
 
+        FirstPersonController.inputActions.Player.Jump.performed -= OnStandUpRequested;
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;
         BlackFade.Instance.FadeOut();
     }
@@ -105,34 +106,24 @@ public class Toilet : InteractBaseClass
     private void StandUp()
     {
         isSitting = false;
+        canStand = false;
         FirstPersonController.Instance.SetSitting(false);
-        FirstPersonController.inputActions.Player.Jump.performed -= OnStandUpRequested;
 
         Vector3 standPosition = playerStandPosition != null ? playerStandPosition.position : playerTargetPosition.position + playerTargetPosition.forward * 0.5f + Vector3.up * 0.2f;
         Quaternion standRotation = playerStandPosition != null ? playerStandPosition.rotation : playerTargetPosition.rotation;
 
         FirstPersonController.Instance.transform.position = standPosition;
         FirstPersonController.Instance.transform.rotation = standRotation;
-        
+
         FirstPersonController.Instance.GetComponent<CharacterController>().enabled = true;
         FirstPersonController.Instance.AllowMovement(true);
 
         toiletCanvas.gameObject.SetActive(false);
-        canStand = false;
 
-        if(!reInteactable)
-        {
-            enabled = false;
-        }
-
-        StartCoroutine(WaitAndShowText());
-    }
-
-    private IEnumerator WaitAndShowText()
-    {
-        yield return new WaitForSeconds(2f);
         PlayerPrefs.SetInt("UsedToilet", 1);
         PlayerPrefs.Save();
-        BottomText.Instance.ShowText("I should go buy some shampoo and soap...");
+        StartCoroutine(BottomText.Instance.WaitAndShowText(2f, "I should go buy some shampoo and soap..."));
+
+        enabled = false;
     }
 }

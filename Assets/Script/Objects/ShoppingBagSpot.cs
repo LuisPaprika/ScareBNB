@@ -61,14 +61,8 @@ public class ShoppingBagSpot : InteractBaseClass
 
         PickUpSystem.Instance.EnablingItem(-1);
 
-        StartCoroutine(WaitAndShowText());
-    }
-
-    private IEnumerator WaitAndShowText()
-    {
-        yield return new WaitForSeconds(2f);
         PlayerPrefs.SetInt(SaveKey, 1);
         PlayerPrefs.Save();
-        BottomText.Instance.ShowText("I should take a shower");
+        StartCoroutine(BottomText.Instance.WaitAndShowText(2f, "I should take a shower"));
     }
 }

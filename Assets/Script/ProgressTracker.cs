@@ -37,16 +37,10 @@ public class ProgressTracker : MonoBehaviour
         currentCleanedSpot++;
         if (currentCleanedSpot >= 6)
         {
-            StartCoroutine(WaitAndShowText());
+            PlayerPrefs.SetInt("AllSpotsCleaned", 1);
+            PlayerPrefs.Save();
+            StartCoroutine(BottomText.Instance.WaitAndShowText(2f, "I need to go to the toilet"));
         }
-    }
-
-    private IEnumerator WaitAndShowText()
-    {
-        yield return new WaitForSeconds(2f);
-        PlayerPrefs.SetInt("AllSpotsCleaned", 1);
-        PlayerPrefs.Save();
-        BottomText.Instance.ShowText("I need to go to the toilet");
     }
 
 

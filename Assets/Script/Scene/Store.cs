@@ -5,13 +5,21 @@ public class Store : MonoBehaviour
 {
     [SerializeField] private Transform returnPosition;
     private bool usedStore = false;
+
+    void Start()
+    {
+        if(PlayerPrefs.GetInt("UsedStore", 0) == 1)
+        {
+            usedStore = true;
+            Destroy(gameObject);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player") || usedStore) return;
 
         if (PlayerPrefs.GetInt("UsedToilet") == 0)
         {
-            BottomText.Instance.ShowText("I don't need to go here yet...");
             return;
         }
 

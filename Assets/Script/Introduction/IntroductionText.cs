@@ -61,7 +61,6 @@ public class IntroductionText : MonoBehaviour
     
     private void ShowText()
     {
-        Debug.Log("ShowText called");
         isTyping = true;
         StartCoroutine(TypeText());
     }
