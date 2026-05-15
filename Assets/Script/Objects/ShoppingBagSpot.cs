@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ShoppingBagSpot : InteractBaseClass
 {
+    [SerializeField] private MeshRenderer spotRenderer;
     [SerializeField] private GameObject spotVisual;
     private string SaveKey => "PlacementSpot_shopping_bag_Placed";
     private bool hasHinted = false;
@@ -63,6 +64,7 @@ public class ShoppingBagSpot : InteractBaseClass
         }
 
         spotVisual.SetActive(true);
+        spotRenderer.enabled = false;
 
         enabled = false;
 

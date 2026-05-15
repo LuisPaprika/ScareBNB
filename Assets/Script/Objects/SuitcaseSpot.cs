@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SuitcaseSpot : InteractBaseClass
 {
+    [SerializeField] private MeshRenderer spotRenderer;
     [SerializeField] private string spotID = "suitcase_spot";
     [SerializeField] private GameObject spotVisual;
 
@@ -48,6 +49,7 @@ public class SuitcaseSpot : InteractBaseClass
     public override void Interact()
     {
         spotVisual.SetActive(true);
+        spotRenderer.enabled = false;
 
         enabled = false;
 
