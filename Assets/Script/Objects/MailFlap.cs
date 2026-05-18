@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MailFlap : MonoBehaviour
 {
+    [SerializeField] Animator flapAnimator;
     [SerializeField] private Transform lookPoint;
     private Camera playerCamera;
     private bool isZooming = false;
@@ -74,6 +75,9 @@ public class MailFlap : MonoBehaviour
 
         BottomText.Instance.ShowText("I need to stay still...");
         yield return new WaitForSeconds(5f);
+        flapAnimator.enabled = false;
+        Quaternion startFlapRotation = flapAnimator.transform.localRotation;
+        StartCoroutine(ResetFlapRotation(startFlapRotation, Quaternion.identity, 1f));
 
         time = 0f;
         while (time < zoomDuration)
@@ -96,5 +100,22 @@ public class MailFlap : MonoBehaviour
         BottomText.Instance.ShowText("It should be safe to move now.");
         StandPromptCanvas.Instance.EnablePrompt(true);
         isZooming = false;
+    }
+
+    private System.Collections.IEnumerator ResetFlapRotation(Quaternion startRotation, Quaternion endRotation, float duration)
+    {
+        if (flapAnimator == null)
+            yield break;
+
+        float time = 0f;
+        while (time < duration)
+        {
+            float t = time / duration;
+            flapAnimator.transform.localRotation = Quaternion.Slerp(startRotation, endRotation, t);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        flapAnimator.transform.localRotation = endRotation;
     }
 }

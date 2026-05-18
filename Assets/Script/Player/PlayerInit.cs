@@ -63,30 +63,28 @@ public class PlayerInit : MonoBehaviour
 
     private void SetPlayerPositionForScene(string sceneName)
     {
-        Transform playerTransform = FirstPersonController.Instance != null ? FirstPersonController.Instance.transform : null;
-        if (spawnPoints.ContainsKey(sceneName))
+        if (!spawnPoints.ContainsKey(sceneName) || FirstPersonController.Instance == null)
+            return;
+
+        var spawnData = spawnPoints[sceneName];
+        FirstPersonController.Instance.SetAllowAccumulateDistance(false);
+        var controller = FirstPersonController.Instance.GetComponent<CharacterController>();
+
+        if (controller != null)
         {
-            var spawnData = spawnPoints[sceneName];
-            if (FirstPersonController.Instance != null)
-            {
-                FirstPersonController.Instance.SetAllowAccumulateDistance(false);
-                var controller = FirstPersonController.Instance.GetComponent<CharacterController>();
-                if (controller != null)
-                {
-                    controller.enabled = false;
-                    playerTransform.position = spawnData.Item1;
-                    playerTransform.rotation = spawnData.Item2;
-                    controller.enabled = true;
-                }
-                else
-                {
-                    playerTransform.position = spawnData.Item1;
-                    playerTransform.rotation = spawnData.Item2;
-                }
-                FirstPersonController.Instance.SetAllowAccumulateDistance(true);
-            }
+            controller.enabled = false;
         }
 
+        FirstPersonController.Instance.transform.position = spawnData.Item1;
+        FirstPersonController.Instance.SetLookDirection(spawnData.Item2.eulerAngles.y, 0f);
+        FirstPersonController.Instance.ResetCameraPosition();
+
+        if (controller != null)
+        {
+            controller.enabled = true;
+        }
+
+        FirstPersonController.Instance.SetAllowAccumulateDistance(true);
     }
 
     private void OnDisable()

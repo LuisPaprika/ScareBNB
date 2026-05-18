@@ -270,6 +270,14 @@ public class FirstPersonController : MonoBehaviour
         allowAccumulateDistance = allow;
     }
 
+    public void ResetCameraPosition()
+    {
+        if (cameraTransform == null || controller == null)
+            return;
+
+        cameraTransform.localPosition = new Vector3(0f, controller.height / 2f, 0f);
+    }
+
     public void AllowingControl(bool value)
     {
         allowControls = value;

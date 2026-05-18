@@ -119,6 +119,134 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &5180434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5180435}
+  - component: {fileID: 5180439}
+  - component: {fileID: 5180438}
+  - component: {fileID: 5180437}
+  - component: {fileID: 5180436}
+  m_Layer: 0
+  m_Name: Door (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5180435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180434}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.87, z: -0.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 543450651687243371}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5180436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e86b7e51093f6a4f8d9f92012571a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InsideDoor203
+  reInteactable: 1
+--- !u!64 &5180437
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180434}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2619086233303812490, guid: 89051c104022f64408d6149f54256b1b, type: 3}
+--- !u!23 &5180438
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180434}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0d8d9403b818c024f95a057012145365, type: 2}
+  - {fileID: 2100000, guid: f308302334d634d44b6a5dbb8264ca75, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &5180439
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180434}
+  m_Mesh: {fileID: 2619086233303812490, guid: 89051c104022f64408d6149f54256b1b, type: 3}
 --- !u!64 &23044155
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3978,6 +4106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   reInteactable: 0
+  showerDoor: {fileID: 6697621764045715923}
+  toiletDoor: {fileID: 4931218028006493621}
   sitPosition: {fileID: 1840540260}
   standPosition: {fileID: 1840540260}
   beers: {fileID: 1169322205}
@@ -4800,6 +4930,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   reInteactable: 0
+  flapAnimator: {fileID: 1517573601}
+  showerDoor: {fileID: 6697621764045715923}
+  toiletDoor: {fileID: 4931218028006493621}
   sleepPosition: {fileID: 1729722260}
   standPosition: {fileID: 1250493294}
 --- !u!1 &1071575488
@@ -5959,7 +6092,7 @@ Transform:
   m_GameObject: {fileID: 1399113065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.93, y: -0.49, z: 5.59}
+  m_LocalPosition: {x: -0.93, y: -0.443, z: 5.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6255,6 +6388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1517573600}
+  - component: {fileID: 1517573601}
   m_Layer: 0
   m_Name: FlapPivot
   m_TagString: Untagged
@@ -6271,13 +6405,35 @@ Transform:
   m_GameObject: {fileID: 1517573599}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.108, y: 1.181, z: -6.408}
+  m_LocalPosition: {x: -3.108, y: 1.187, z: -6.408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5419662711042841733}
   m_Father: {fileID: 543450651687243371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1517573601
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517573599}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c587b569c7c6f0641a724ac77cb63070, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1538039677
 GameObject:
   m_ObjectHideFlags: 0
@@ -6340,15 +6496,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1737900700713659185, guid: 560614c9b682f634792e6642aa18894b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1737900700713659185, guid: 560614c9b682f634792e6642aa18894b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.54
+      value: 0.066
       objectReference: {fileID: 0}
     - target: {fileID: 1737900700713659185, guid: 560614c9b682f634792e6642aa18894b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.01
+      value: -0.074
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241343552691455723, guid: 560614c9b682f634792e6642aa18894b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241343552691455723, guid: 560614c9b682f634792e6642aa18894b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 2270913254006959176, guid: 560614c9b682f634792e6642aa18894b, type: 3}
       propertyPath: m_Mesh
@@ -8929,6 +9093,7 @@ Transform:
   - {fileID: 8946660040436511589}
   - {fileID: 6614996720217503984}
   - {fileID: 7272638917863378735}
+  - {fileID: 5180435}
   - {fileID: 2489159159328857144}
   - {fileID: 119655708}
   - {fileID: 1517573600}
@@ -11264,6 +11429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f0fbb3ff93dea488b2c3108544f593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MailFlap
+  flapAnimator: {fileID: 1517573601}
   lookPoint: {fileID: 1552543537}
 --- !u!1 &5987733727784920868
 GameObject:

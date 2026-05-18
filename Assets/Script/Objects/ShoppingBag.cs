@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class ShoppingBag : InteractBaseClass
 {
+    [SerializeField] private DoorInteract showerDoor;
+    [SerializeField] private DoorInteract toiletDoor;
     [SerializeField] private Transform sitPosition;
     [SerializeField] private Transform standPosition;
     [SerializeField] private GameObject beers;
@@ -51,6 +53,16 @@ public class ShoppingBag : InteractBaseClass
         {
             BottomText.Instance.ShowText("I don't need to use this yet...");
             return;
+        }
+
+        if(showerDoor.isOpen)
+        {
+            showerDoor.Interact();
+        }
+
+        if(toiletDoor.isOpen)
+        {
+            toiletDoor.Interact();
         }
 
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;

@@ -16,7 +16,11 @@ public class SuitcaseSpot : InteractBaseClass
         spotVisual.SetActive(isPlaced);
 
         if (isPlaced)
+        {
+            spotRenderer.enabled = false;
             enabled = false;
+        }
+
     }
 
     private void Update()

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Bed : InteractBaseClass
 {
+    [SerializeField] private Animator flapAnimator;
+    [SerializeField] private DoorInteract showerDoor;
+    [SerializeField] private DoorInteract toiletDoor;
     [SerializeField] private Transform sleepPosition;
     [SerializeField] private Transform standPosition;
     private bool hasStandUp = false;
@@ -27,6 +30,16 @@ public class Bed : InteractBaseClass
         }
         SetInteractable(false);
 
+        if(showerDoor.isOpen)
+        {
+            showerDoor.Interact();
+        }
+
+        if(toiletDoor.isOpen)
+        {
+            toiletDoor.Interact();
+        }
+
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;
         BlackFade.Instance.FadeOut();
     }
@@ -37,6 +50,7 @@ public class Bed : InteractBaseClass
         if (!FirstPersonController.Instance.isCrawling)
         {
             FirstPersonController.Instance.SetCrawling(true);
+            flapAnimator.SetTrigger("Play");
             StartCoroutine(WaitAndFadeIn());
         }
         else if (FirstPersonController.Instance.isCrawling)
