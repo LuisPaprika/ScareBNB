@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MailFlap : MonoBehaviour
 {
+    [SerializeField] private AudioSource flapSound;
     [SerializeField] Animator flapAnimator;
     [SerializeField] private Transform lookPoint;
     private Camera playerCamera;
@@ -9,7 +10,7 @@ public class MailFlap : MonoBehaviour
     private bool hasZoomed = false;
     private float originalFOV;
     private Quaternion originalCameraRotation;
-    private float zoomDuration = 1f;
+    private float zoomDuration = 5f;
     private float zoomFOV = 30f;
 
     void Start()
@@ -74,7 +75,9 @@ public class MailFlap : MonoBehaviour
         playerCamera.fieldOfView = zoomFOV;
 
         BottomText.Instance.ShowText("I need to stay still...");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(zoomDuration);
+
+        flapSound.Stop();
         flapAnimator.enabled = false;
         Quaternion startFlapRotation = flapAnimator.transform.localRotation;
         StartCoroutine(ResetFlapRotation(startFlapRotation, Quaternion.identity, 1f));

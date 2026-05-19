@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Mailbox : InteractBaseClass
 {
+    [SerializeField] private AudioSource mailSound;
     [SerializeField] private string dialogueText;
 
     void Start()
@@ -13,6 +14,7 @@ public class Mailbox : InteractBaseClass
     }
     public override void Interact()
     {
+        mailSound.PlayOneShot(mailSound.clip);
         BottomText.Instance.ShowText(dialogueText);
         ProgressTracker.Instance.ObtainKey();
 

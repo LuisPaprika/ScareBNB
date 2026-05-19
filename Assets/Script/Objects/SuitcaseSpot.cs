@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SuitcaseSpot : InteractBaseClass
 {
+    [SerializeField] private AudioSource placeSound;
     [SerializeField] private MeshRenderer spotRenderer;
     [SerializeField] private string spotID = "suitcase_spot";
     [SerializeField] private GameObject spotVisual;
@@ -52,6 +53,8 @@ public class SuitcaseSpot : InteractBaseClass
 
     public override void Interact()
     {
+        placeSound.PlayOneShot(placeSound.clip);
+
         spotVisual.SetActive(true);
         spotRenderer.enabled = false;
 

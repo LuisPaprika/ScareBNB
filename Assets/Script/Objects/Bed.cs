@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bed : InteractBaseClass
 {
+    [SerializeField] private AudioSource flapSound;
     [SerializeField] private Animator flapAnimator;
     [SerializeField] private DoorInteract showerDoor;
     [SerializeField] private DoorInteract toiletDoor;
@@ -74,6 +75,8 @@ public class Bed : InteractBaseClass
 
         controller.enabled = true;
         yield return new WaitForSeconds(5f);
+        flapSound.Play();
+        yield return new WaitForSeconds(2f);
         BlackFade.Instance.FadeIn();
 
         PlayerPrefs.SetInt("SleptInBed", 1);

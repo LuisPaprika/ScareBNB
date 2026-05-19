@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cameraTransform: {fileID: 9078389667108049950}
-  walkSpeed: 2.5
+  walkSpeed: 3
   sprintSpeed: 20
   jumpHeight: 1.5
   gravity: -24

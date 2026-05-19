@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
+using System;
 
 public class Toilet : InteractBaseClass
 {
+    [SerializeField] private AudioSource peeingSound;
     [SerializeField] private Transform playerTargetPosition;
     [SerializeField] private Transform playerStandPosition;
     [SerializeField] private DoorInteract bathroomDoor;
@@ -14,7 +15,10 @@ public class Toilet : InteractBaseClass
     private bool isSitting;
     private bool canStand = false;
     private float holdTime = 0f;
-    [SerializeField] float maxHoldTime = 10f;
+    private bool sequenceStarted = false;
+    [SerializeField] float maxHoldTime = 20f;
+    [SerializeField] float sequenceTiming = 10f;
+    public static event Action OnSequenceStart;
 
     void Start()
     {
@@ -25,7 +29,7 @@ public class Toilet : InteractBaseClass
     }
 
     public override void Interact()
-    {
+    {        
         if (PlayerPrefs.GetInt("AllSpotsCleaned", 0) == 0)
         {
             BottomText.Instance.ShowText("I didn't want to use this yet...");
@@ -42,12 +46,32 @@ public class Toilet : InteractBaseClass
         {
             if (FirstPersonController.inputActions.Player.Jump.IsPressed())
             {
+                if (!peeingSound.isPlaying && !canStand)
+                {
+                    peeingSound.Play();
+                }
+
                 holdTime += Time.deltaTime;
                 toiletSlider.value = Mathf.Clamp01(holdTime / maxHoldTime);
+
+                if(holdTime >= sequenceTiming && !sequenceStarted)
+                {
+                    sequenceStarted = true;
+                    OnSequenceStart?.Invoke();
+                }
+
                 if (holdTime >= maxHoldTime && !canStand)
                 {
+                    peeingSound.Stop();
                     canStand = true;
                     prompt.text = "Stand";
+                }
+            }
+            else
+            {
+                if (peeingSound.isPlaying)
+                {
+                    peeingSound.Stop();
                 }
             }
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ShoppingBagSpot : InteractBaseClass
 {
+    [SerializeField] private AudioSource placeSound;
     [SerializeField] private MeshRenderer spotRenderer;
     [SerializeField] private GameObject spotVisual;
     private string SaveKey => "PlacementSpot_shopping_bag_Placed";
@@ -61,11 +62,13 @@ public class ShoppingBagSpot : InteractBaseClass
     }
 
     public override void Interact()
-    {
+    {    
         if(PlayerPrefs.GetInt("UsedStore") == 0)
         {
             return;
         }
+
+        placeSound.PlayOneShot(placeSound.clip);
 
         spotVisual.SetActive(true);
         spotRenderer.enabled = false;

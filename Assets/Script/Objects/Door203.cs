@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Door203 : InteractBaseClass
 {
+    [SerializeField] private AudioSource doorSound;
     [SerializeField] private Transform spawnPoint;
 
     private bool canGoInside;
@@ -30,7 +31,6 @@ public class Door203 : InteractBaseClass
 
     public override void Interact()
     {
-
         if (PlayerPrefs.GetInt("EnteredRoom203") == 0)
         {
             if (!ProgressTracker.Instance.hasKey)
@@ -41,6 +41,7 @@ public class Door203 : InteractBaseClass
 
             PlayerPrefs.SetInt("EnteredRoom203", 1);
             PlayerPrefs.Save();
+            doorSound.PlayOneShot(doorSound.clip);
         }
 
         else
@@ -50,6 +51,7 @@ public class Door203 : InteractBaseClass
                 BottomText.Instance.ShowText("I shouldn't go inside right now.");
                 return;
             }
+            doorSound.PlayOneShot(doorSound.clip);
         }
 
         PlayerInit.Instance.SetSpawnPointKey(

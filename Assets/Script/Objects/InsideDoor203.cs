@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InsideDoor203 : InteractBaseClass
 {
+    [SerializeField] private AudioSource doorSound;
     private bool canGoOutside;
 
     void Update()
@@ -23,6 +24,7 @@ public class InsideDoor203 : InteractBaseClass
             return;
         }
 
+        doorSound.PlayOneShot(doorSound.clip);
         SceneLoader.Instance.LoadSceneWithFade("Apartment");
     }
 }

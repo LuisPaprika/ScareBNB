@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class ShoppingBag : InteractBaseClass
 {
+    [SerializeField] private AudioSource drinkingSound;
     [SerializeField] private DoorInteract showerDoor;
     [SerializeField] private DoorInteract toiletDoor;
     [SerializeField] private Transform sitPosition;
@@ -28,6 +29,10 @@ public class ShoppingBag : InteractBaseClass
             beerSlider.value = Mathf.Clamp01(holdTime / maxHoldTime);
             if (holdTime >= maxHoldTime && !canStand)
             {
+                if (!drinkingSound.isPlaying)
+                {
+                    drinkingSound.Play();
+                }
                 PickUpSystem.Instance.EnablingItem(-1);
                 pickupPrompt.SetActive(true);
                 drinkingPrompt.SetActive(false);
@@ -39,11 +44,20 @@ public class ShoppingBag : InteractBaseClass
                     standUpPrompt.SetActive(true);
                     pickupPrompt.SetActive(false);
 
+                    drinkingSound.Stop();
+
                     FirstPersonController.inputActions.Player.Jump.performed += OnStandUpRequested;
                 }
 
-                holdingBeer = false;
                 holdTime = 0f;
+                holdingBeer = false;
+            }
+        }
+        else
+        {
+            if (drinkingSound.isPlaying)
+            {
+                drinkingSound.Stop();
             }
         }
     }
@@ -64,6 +78,8 @@ public class ShoppingBag : InteractBaseClass
         {
             toiletDoor.Interact();
         }
+
+        maxHoldTime = drinkingSound.clip.length;
 
         BlackFade.OnFadeOutComplete += OnFadeOutComplete;
         BlackFade.Instance.FadeOut();

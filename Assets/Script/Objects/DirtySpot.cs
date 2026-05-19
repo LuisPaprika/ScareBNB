@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class DirtySpot : InteractBaseClass
 {
+    [SerializeField] private AudioSource cleaningSound;
     [SerializeField] private Canvas progressCanvas;
     [SerializeField] private Slider cleaningProgressBar;
     [SerializeField] private TMPro.TextMeshProUGUI dirtySpotCounterText;
-    [SerializeField] private float cleaningTime;
+    private float cleaningTime;
     private bool checkedPersistence = false;
     private float cleaningProgress = 0f;
 
     void Update()
     {
-        if(PlayerPrefs.GetInt("PlacementSpot_suitcase_spot_Placed", 0) == 0)
+        if (PlayerPrefs.GetInt("PlacementSpot_suitcase_spot_Placed", 0) == 0)
         {
             progressCanvas.gameObject.SetActive(false);
             return;
@@ -44,7 +45,9 @@ public class DirtySpot : InteractBaseClass
 
     public override void Interact()
     {
-        if(PlayerPrefs.GetInt("PlacementSpot_suitcase_spot_Placed", 0) == 0)
+        cleaningTime = cleaningSound.clip.length;
+
+        if (PlayerPrefs.GetInt("PlacementSpot_suitcase_spot_Placed", 0) == 0)
         {
             return;
         }
@@ -58,23 +61,35 @@ public class DirtySpot : InteractBaseClass
         {
             if (FirstPersonController.inputActions.Player.Attack.WasReleasedThisFrame())
             {
+                if (cleaningSound.isPlaying)
+                {
+                    cleaningSound.Stop();
+                }
+
                 break;
             }
             Ray ray = new Ray(InteractSystem.Instance.CameraTransform.position, InteractSystem.Instance.CameraTransform.forward);
             if (Physics.Raycast(ray, out RaycastHit hit, InteractSystem.Instance.InteractRange, InteractSystem.Instance.NotPlayerLayer) && hit.collider.gameObject == gameObject)
             {
+                if (!cleaningSound.isPlaying)
+                {
+                    cleaningSound.Play();
+                }
                 cleaningProgress += Time.deltaTime / cleaningTime;
                 cleaningProgressBar.value = cleaningProgress;
             }
             else
             {
+                cleaningSound.Stop();
                 break;
             }
             yield return null;
         }
-        FirstPersonController.Instance.AllowMovement(true);
+
         if (cleaningProgress >= 1f)
         {
+            FirstPersonController.Instance.AllowMovement(true);
+            cleaningSound.Stop();
             ProgressTracker.Instance.AddCleanedSpot();
             Destroy(gameObject);
         }

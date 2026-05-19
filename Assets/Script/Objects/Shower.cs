@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Shower : InteractBaseClass
 {
+    [SerializeField] private AudioSource showerSound;
     [SerializeField] private Transform showerPosition;
     [SerializeField] private Transform standPosition;
     [SerializeField] private Canvas showerCanvas;
@@ -17,7 +18,7 @@ public class Shower : InteractBaseClass
 
     void Start()
     {
-        if(PlayerPrefs.GetInt("UsedShower", 0) == 1)
+        if (PlayerPrefs.GetInt("UsedShower", 0) == 1)
         {
             enabled = false;
         }
@@ -29,12 +30,24 @@ public class Shower : InteractBaseClass
         {
             if (FirstPersonController.inputActions.Player.Jump.IsPressed())
             {
+                if (!showerSound.isPlaying && !canStand)
+                {
+                    showerSound.Play();
+                }
                 holdTime += Time.deltaTime;
                 showerSlider.value = Mathf.Clamp01(holdTime / maxHoldTime);
                 if (holdTime >= maxHoldTime && !canStand)
                 {
+                    showerSound.Stop();
                     canStand = true;
                     prompt.text = "Stand";
+                }
+            }
+            else
+            {
+                if (showerSound.isPlaying)
+                {
+                    showerSound.Stop();
                 }
             }
         }
