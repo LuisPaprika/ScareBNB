@@ -27,12 +27,13 @@ public class ShoppingBag : InteractBaseClass
         {
             holdTime += Time.deltaTime;
             beerSlider.value = Mathf.Clamp01(holdTime / maxHoldTime);
+            if (!drinkingSound.isPlaying)
+            {
+                drinkingSound.Play();
+            }
+            
             if (holdTime >= maxHoldTime && !canStand)
             {
-                if (!drinkingSound.isPlaying)
-                {
-                    drinkingSound.Play();
-                }
                 PickUpSystem.Instance.EnablingItem(-1);
                 pickupPrompt.SetActive(true);
                 drinkingPrompt.SetActive(false);
@@ -63,18 +64,20 @@ public class ShoppingBag : InteractBaseClass
     }
     public override void Interact()
     {
+        maxHoldTime = drinkingSound.clip.length;
+
         if (PlayerPrefs.GetInt("UsedShower", 0) == 0)
         {
             BottomText.Instance.ShowText("I don't need to use this yet...");
             return;
         }
 
-        if(showerDoor.isOpen)
+        if (showerDoor.isOpen)
         {
             showerDoor.Interact();
         }
 
-        if(toiletDoor.isOpen)
+        if (toiletDoor.isOpen)
         {
             toiletDoor.Interact();
         }
@@ -111,7 +114,7 @@ public class ShoppingBag : InteractBaseClass
     }
 
     private void StandUp()
-    {  
+    {
         CharacterController controller = FirstPersonController.Instance.GetComponent<CharacterController>();
         controller.enabled = false;
         FirstPersonController.Instance.transform.position = standPosition.position;
