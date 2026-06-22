@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Store : MonoBehaviour
 {
+    [SerializeField] private Animator doorAnimator;
     [SerializeField] private Transform returnPosition;
     private bool usedStore = false;
 
@@ -46,6 +47,8 @@ public class Store : MonoBehaviour
         FirstPersonController.Instance.transform.rotation = returnPosition.rotation;
         cc.enabled = true;
         BlackFade.Instance.FadeIn();
+
+        doorAnimator.SetTrigger("Open");
     }
 
 

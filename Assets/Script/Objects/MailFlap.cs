@@ -10,7 +10,7 @@ public class MailFlap : MonoBehaviour
     private bool hasZoomed = false;
     private float originalFOV;
     private Quaternion originalCameraRotation;
-    private float zoomDuration = 5f;
+    private float zoomDuration = 3f;
     private float zoomFOV = 30f;
 
     void Start()
@@ -75,7 +75,7 @@ public class MailFlap : MonoBehaviour
         playerCamera.fieldOfView = zoomFOV;
 
         BottomText.Instance.ShowText("I need to stay still...");
-        yield return new WaitForSeconds(zoomDuration);
+        yield return new WaitForSeconds(5f);
 
         flapSound.Stop();
         flapAnimator.enabled = false;
@@ -101,6 +101,7 @@ public class MailFlap : MonoBehaviour
         PlayerPrefs.Save();
 
         BottomText.Instance.ShowText("It should be safe to move now.");
+        yield return new WaitForSeconds(2.5f);
         StandPromptCanvas.Instance.EnablePrompt(true);
         isZooming = false;
     }

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class DoorPeekTrigger : MonoBehaviour
 {
+    [SerializeField] private Animator doorAnimator;
+    [SerializeField] private AudioSource doorSound;
+
     void Start()
     {
         if (PlayerPrefs.GetInt("DoorPeekTriggered", 0) == 1)
@@ -22,9 +25,11 @@ public class DoorPeekTrigger : MonoBehaviour
             return;
         }
 
+        doorAnimator.SetTrigger("Close");
+        doorSound.Play();
+
         PlayerPrefs.SetInt("DoorPeekTriggered", 1);
         PlayerPrefs.Save();
-        BottomText.Instance.ShowText("Trigger Door Peek");
         Destroy(gameObject);
     }
 }

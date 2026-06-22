@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BadEndTrigger : MonoBehaviour
 {
+    [SerializeField] private GameObject ownerModel;
     void Start()
     {
         if(PlayerPrefs.GetInt("UsedNetCafe", 0) == 0)
@@ -9,6 +11,8 @@ public class BadEndTrigger : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        ownerModel.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -16,7 +20,8 @@ public class BadEndTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        BottomText.Instance.ShowText("Trigger Bad End");
+        ownerModel.GetComponent<Owner>().MoveToPlayer();
+
         Destroy(gameObject);
     }
 }
