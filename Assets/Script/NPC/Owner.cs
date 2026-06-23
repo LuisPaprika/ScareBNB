@@ -24,6 +24,8 @@ public class Owner : MonoBehaviour
             return;
 
         PlayerPrefs.SetInt("UsedNetCafe", 0);
+        PlayerPrefs.SetInt("FinaleTriggered", 0);
+        PlayerPrefs.Save();
         SceneLoader.Instance.LoadSceneWithFade("InternetCafe");
     }
 }

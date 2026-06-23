@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class FinaleTrigger : MonoBehaviour
 {
+    [SerializeField] private GameObject ownerModel;
+    [SerializeField] private Animator doorAnimator;
     void Start()
     {
         if(PlayerPrefs.GetInt("FinaleTriggered", 0) == 1)
@@ -31,7 +33,9 @@ public class FinaleTrigger : MonoBehaviour
         PlayerPrefs.SetInt("FinaleTriggered", 1);
         PlayerPrefs.Save();
         
-        BottomText.Instance.ShowText("Trigger Finale");
+        doorAnimator.SetTrigger("Open");
+        ownerModel.SetActive(true);
+        ownerModel.GetComponent<Owner>().MoveToPlayer();
         Destroy(gameObject);
     }
 }
