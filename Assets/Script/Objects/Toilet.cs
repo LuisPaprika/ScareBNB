@@ -146,7 +146,7 @@ public class Toilet : InteractBaseClass
 
         PlayerPrefs.SetInt("UsedToilet", 1);
         PlayerPrefs.Save();
-        StartCoroutine(BottomText.Instance.WaitAndShowText(2f, "I should go buy some shampoo and soap..."));
+        StartCoroutine(BottomText.Instance.WaitAndShowText(2f, "I should go buy some shampoo, soap and maybe some beers."));
 
         enabled = false;
     }
