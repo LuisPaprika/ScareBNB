@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bed : InteractBaseClass
 {
+    [SerializeField] private GameObject roomLight;
     [SerializeField] private AudioSource flapSound;
     [SerializeField] private Animator flapAnimator;
     [SerializeField] private DoorInteract showerDoor;
@@ -10,6 +11,13 @@ public class Bed : InteractBaseClass
     [SerializeField] private Transform standPosition;
     private bool hasStandUp = false;
 
+    void Start()
+    {
+        if (PlayerPrefs.GetInt("EnteredNetCafe", 0) == 1)
+        {
+            roomLight.SetActive(false);
+        }
+    }
     void Update()
     {
         if (PlayerPrefs.GetInt("SeeMailFlap", 0) == 1)
@@ -48,6 +56,7 @@ public class Bed : InteractBaseClass
     private void OnFadeOutComplete()
     {
         BlackFade.OnFadeOutComplete -= OnFadeOutComplete;
+        roomLight.SetActive(false);
         if (!FirstPersonController.Instance.isCrawling)
         {
             FirstPersonController.Instance.SetCrawling(true);
