@@ -103,6 +103,7 @@ public class MailFlap : MonoBehaviour
         BottomText.Instance.ShowText("It should be safe to move now.");
         yield return new WaitForSeconds(2.5f);
         StandPromptCanvas.Instance.EnablePrompt(true);
+        BottomText.Instance.ShowText("I should get out of here.");
         isZooming = false;
     }
 

@@ -5389,9 +5389,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1122627211592393800, guid: a53bf44a1cf4cfb4bb082103cc9b5840, type: 3}
+      propertyPath: sprintSpeed
+      value: 5.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1650174224431171205, guid: a53bf44a1cf4cfb4bb082103cc9b5840, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863288344745271400, guid: a53bf44a1cf4cfb4bb082103cc9b5840, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 339
       objectReference: {fileID: 0}
     - target: {fileID: 5332457722101528238, guid: a53bf44a1cf4cfb4bb082103cc9b5840, type: 3}
       propertyPath: m_LocalPosition.x

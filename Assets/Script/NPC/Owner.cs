@@ -8,8 +8,7 @@ public class Owner : MonoBehaviour
     {
         if(movingToPlayer)
         {
-            bool success = gameObject.GetComponent<NavMeshAgent>().SetDestination(FirstPersonController.Instance.transform.position);
-            Debug.Log("Owner moving to player: " + success);
+            gameObject.GetComponent<NavMeshAgent>().SetDestination(FirstPersonController.Instance.transform.position);
         }
     }
 

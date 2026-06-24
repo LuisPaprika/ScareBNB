@@ -26,6 +26,8 @@ public class NetCafeTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        PlayerPrefs.SetInt("EnteredNetCafe", 1);
+        PlayerPrefs.Save();
         PlayerInit.Instance.SetSpawnPointKey(SceneManager.GetActiveScene().name, returnPosition.position, returnPosition.rotation);
         SceneLoader.Instance.LoadSceneWithFade("InternetCafe");
     }

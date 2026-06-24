@@ -944,6 +944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Computer
   reInteactable: 0
+  instructionUI: {fileID: 411875938}
 --- !u!65 &357688936
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6588,6 +6589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   reInteactable: 0
+  instructionUI: {fileID: 0}
 --- !u!1 &1149343905
 GameObject:
   m_ObjectHideFlags: 0
@@ -6956,6 +6958,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1122627211592393800, guid: a53bf44a1cf4cfb4bb082103cc9b5840, type: 3}
+      propertyPath: sprintSpeed
+      value: 5.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5332457722101528238, guid: a53bf44a1cf4cfb4bb082103cc9b5840, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.1

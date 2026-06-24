@@ -54,11 +54,15 @@ public class Door203 : InteractBaseClass
             doorSound.PlayOneShot(doorSound.clip);
         }
 
-        PlayerInit.Instance.SetSpawnPointKey(
+        if (PlayerPrefs.GetInt("EnteredNetCafe", 0) == 0)
+        {
+            PlayerInit.Instance.SetSpawnPointKey(
             SceneManager.GetActiveScene().name,
             spawnPoint.position,
             spawnPoint.rotation
         );
+        }
+
 
         SceneLoader.Instance.LoadSceneWithFade("Room");
     }
