@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class FinaleTrigger : MonoBehaviour
 {
+    [SerializeField] private AudioSource doorSound;
+    [SerializeField] private AudioSource jumpscareSound;
     [SerializeField] private GameObject ownerModel;
     [SerializeField] private Animator doorAnimator;
     void Start()
@@ -30,6 +32,8 @@ public class FinaleTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        doorSound.PlayOneShot(doorSound.clip);
+        jumpscareSound.PlayOneShot(jumpscareSound.clip);
         PlayerPrefs.SetInt("FinaleTriggered", 1);
         PlayerPrefs.Save();
         
