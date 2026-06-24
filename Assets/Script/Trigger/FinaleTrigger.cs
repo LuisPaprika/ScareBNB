@@ -32,8 +32,8 @@ public class FinaleTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        doorSound.PlayOneShot(doorSound.clip);
-        jumpscareSound.PlayOneShot(jumpscareSound.clip);
+        doorSound.Play();
+        jumpscareSound.Play();
         PlayerPrefs.SetInt("FinaleTriggered", 1);
         PlayerPrefs.Save();
         

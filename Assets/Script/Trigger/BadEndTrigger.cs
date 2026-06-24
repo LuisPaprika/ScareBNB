@@ -21,7 +21,7 @@ public class BadEndTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        jumpscareSound.PlayOneShot(jumpscareSound.clip);
+        jumpscareSound.Play();
         ownerModel.GetComponent<Owner>().MoveToPlayer();
 
         Destroy(gameObject);
