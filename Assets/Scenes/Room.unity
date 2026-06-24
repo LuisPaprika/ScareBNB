@@ -4979,7 +4979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   reInteactable: 0
-  roomLight: {fileID: 0}
+  roomLight: {fileID: 989571189}
   flapSound: {fileID: 1552543538}
   flapAnimator: {fileID: 1517573601}
   showerDoor: {fileID: 6697621764045715923}
