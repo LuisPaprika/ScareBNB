@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class Owner : MonoBehaviour
 {
+    [SerializeField] private AudioSource jumpscareSound;
     private bool movingToPlayer = false;
     void Update()
     {
@@ -15,6 +16,7 @@ public class Owner : MonoBehaviour
     public void MoveToPlayer()
     {
         movingToPlayer = true;
+        jumpscareSound.PlayOneShot(jumpscareSound.clip);
     }
 
     private void OnTriggerEnter(Collider other)

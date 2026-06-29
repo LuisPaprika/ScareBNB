@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class BadEndTrigger : MonoBehaviour
 {
-    [SerializeField] private AudioSource jumpscareSound;
     [SerializeField] private GameObject ownerModel;
     void Start()
     {
@@ -21,9 +20,7 @@ public class BadEndTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        jumpscareSound.Play();
         ownerModel.GetComponent<Owner>().MoveToPlayer();
-
         Destroy(gameObject);
     }
 }
